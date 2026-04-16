@@ -1,34 +1,25 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
+from dotenv import load_dotenv
 import os
 
-# 🔐 Use ENV variable (recommended)
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "postgresql://postgres:atharvbhuwad@db.weufmyheyhatcfzzztyu.supabase.co:6543/postgres"
-)
+load_dotenv()  
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-# 🚀 Engine with SSL + stability configs
+print("DB URL:", DATABASE_URL)  
+
 engine = create_engine(
     DATABASE_URL,
-    pool_pre_ping=True,   # avoids stale connections
+    connect_args={"sslmode": "require"},  # required for Supabase
     pool_size=5,
-    max_overflow=10,
-    connect_args={
-        "sslmode": "require"   # 🔥 REQUIRED for Supabase
-    }
+    max_overflow=10
 )
 
-SessionLocal = sessionmaker(
-    autocommit=False,
-    autoflush=False,
-    bind=engine
-)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
 
-# 📦 Dependency (FastAPI style)
 def get_db():
     db = SessionLocal()
     try:
