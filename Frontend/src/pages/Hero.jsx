@@ -42,19 +42,19 @@ const Hero = () => {
           animate="visible"
           variants={containerVariants}
         >
-          <motion.h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-snug">
+          <motion.h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-100 leading-snug">
             <motion.div custom={0} variants={lineVariants}>
               Shape Your Future with
             </motion.div>
             <motion.div custom={1} variants={lineVariants}>
-              <span className="text-blue-600 drop-shadow-lg">
+              <span className="text-white drop-shadow-lg">
                 CareerPath Navigator
               </span>
             </motion.div>
           </motion.h1>
 
           <motion.p
-            className="text-base sm:text-lg md:text-xl text-gray-600"
+            className="text-base sm:text-lg md:text-xl text-gray-400"
             custom={2}
             variants={lineVariants}
           >
@@ -68,10 +68,10 @@ const Hero = () => {
             custom={3}
             variants={lineVariants}
           >
-            <button className="w-full sm:w-auto px-8 py-3 bg-blue-600 text-white font-semibold rounded-xl shadow-md hover:bg-blue-700 hover:shadow-lg transition-all duration-300">
+            <button className="w-full sm:w-auto px-8 py-3 bg-black text-white font-semibold rounded-xl shadow-md hover:bg-gray-800 hover:shadow-lg transition-all duration-300">
               Get Started
             </button>
-            <button className="w-full sm:w-auto px-8 py-3 border-2 border-blue-600 text-blue-600 font-semibold rounded-xl hover:bg-blue-50 hover:shadow-md transition-all duration-300">
+            <button className="w-full sm:w-auto px-8 py-3 border-2 border-neutral-800 text-white font-semibold rounded-xl hover:bg-[#111] hover:shadow-md transition-all duration-300">
               Learn More
             </button>
           </motion.div>

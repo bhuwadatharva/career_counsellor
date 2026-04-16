@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaRoute } from "react-icons/fa";
 import { useAuth } from "../../AuthContext";
 
 export default function Roadmap() {
@@ -14,7 +13,6 @@ export default function Roadmap() {
     const fetchPhases = async () => {
       try {
         const res = await fetch(`http://127.0.0.1:8000/phases/${user.user_id}`);
-
         const data = await res.json();
         setPhases(data);
       } catch (err) {
@@ -26,10 +24,17 @@ export default function Roadmap() {
   }, [user]);
 
   return (
-    <div className="p-6 flex flex-col gap-6 bg-white">
-      <h1 className="text-3xl font-bold text-center">Your Career Roadmap 🚀</h1>
+    <div className="p-10 max-w-7xl mx-auto h-full bg-[#0a0a0a]">
+      <div className="border-b-2 border-neutral-800 pb-4 mb-8">
+        <h1 className="text-4xl font-serif font-black tracking-tight text-white">
+          Career Roadmap Strategy
+        </h1>
+        <p className="font-mono text-xs tracking-widest text-gray-500 uppercase mt-2">
+          Your path to operational excellence
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {phases.map((phase) => (
           <div
             key={phase.id}
@@ -38,27 +43,34 @@ export default function Roadmap() {
                 navigate(`/phase/${phase.id}`);
               }
             }}
-            className={`p-5 rounded-xl border cursor-pointer ${
+            className={`p-6 border transition-all duration-300 relative overflow-hidden group ${
               phase.status === "locked"
-                ? "bg-gray-100 cursor-not-allowed"
-                : "bg-white hover:shadow-md"
+                ? "bg-[#1a1a1a] border-[#444] cursor-not-allowed opacity-70"
+                : "bg-black border-neutral-800 cursor-pointer hover:-translate-y-1 hover:shadow-[4px_4px_0_rgba(255,255,255,0.15)]"
             }`}
           >
-            <span className="text-xs bg-gray-200 px-2 py-1 rounded">
-              Phase {phase.phase_number}
+            {/* Status indicator line element */}
+            <div className={`absolute top-0 left-0 w-1 h-full ${
+              phase.status === 'completed' ? 'bg-black' : phase.status === 'active' ? 'bg-gray-400' : 'bg-transparent'
+            }`} />
+                
+            <span className="font-mono text-[10px] tracking-widest uppercase border border-[#444] px-2 py-1 bg-black text-white mb-4 inline-block">
+              Phase {String(phase.phase_number).padStart(2, "0")}
             </span>
 
-            <h3 className="text-lg font-semibold mt-2">{phase.title}</h3>
+            <h3 className="text-xl font-serif font-bold text-white group-hover:underline underline-offset-4 decoration-2">
+              {phase.title}
+            </h3>
 
-            <p className="mt-2 text-sm">
-              Status:
+            <p className="mt-4 font-mono text-[11px] uppercase tracking-widest flex justify-between items-center text-gray-500">
+              <span>Status</span>
               <span
-                className={`ml-2 font-semibold ${
+                className={`font-semibold border-b ${
                   phase.status === "completed"
-                    ? "text-green-600"
+                    ? "text-white border-neutral-800"
                     : phase.status === "active"
-                      ? "text-blue-600"
-                      : "text-gray-400"
+                    ? "text-white border-dashed border-neutral-800"
+                    : "text-gray-400 border-[#444]"
                 }`}
               >
                 {phase.status}

@@ -16,15 +16,25 @@ def check_and_complete_phase(db: Session, phase_id: int):
         return
 
     projects = db.query(Project).filter_by(phase_id=phase_id).all()
+    skills = db.query(Skill).filter_by(phase_id=phase_id).all()
 
-    all_approved = all(p.status == "approved" for p in projects)
+    all_approved = True
+    if projects:
+        all_approved = all(p.status == "approved" for p in projects)
+        
+    all_skills_completed = True
+    if skills:
+        all_skills_completed = all(s.status == "completed" for s in skills)
 
-    if all_approved and phase.status != "completed":
+    if all_approved and all_skills_completed and phase.status != "completed":
         phase.status = "completed"
         db.commit()
 
         # 🔥 auto-create badge and assign to user
         create_and_assign_badge(db, phase_id)
+        
+        # 🔓 automatically unlock the next phase
+        unlock_next_phase(db, phase)
 
 
 # 🔓 UNLOCK NEXT PHASE

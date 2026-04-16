@@ -57,9 +57,9 @@ const PublicRoute = ({ children }) => {
 
 const DashboardLayout = () => {
   return (
-    <div className="h-screen flex flex-col bg-[#eff3f6] overflow-hidden relative">
+    <div className="h-screen flex flex-col bg-[#050505] overflow-hidden relative">
       <div className="flex flex-1 overflow-hidden relative ">
-        <div className="w-60 bg-white p-4 shadow-lg h-full hidden md:block">
+        <div className="w-60 bg-black p-4 shadow-lg h-full hidden md:block">
           <Sidebar />
         </div>
 
@@ -75,7 +75,7 @@ const DashboardLayout = () => {
             <Route path="/notification" element={<Notification />} />
             <Route path="/achievements" element={<Achievement />} />
             <Route path="/test" element={<Test />} />
-            <Route path="/task" element={<Task />} />
+            <Route path="/task/:phaseId/:projectId" element={<Task />} />
             <Route path="/phase/:phaseId" element={<PhaseDetails />} />
           </Routes>
         </div>

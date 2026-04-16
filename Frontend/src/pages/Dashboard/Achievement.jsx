@@ -1,120 +1,80 @@
-import React from "react";
-
-const favoriteBadges = [
-  {
-    id: 1,
-    title: "Web Dev Bootcamp",
-    date: "Jan 5, 2025",
-    img: "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg",
-  },
-  {
-    id: 2,
-    title: "React Mastery",
-    date: "Feb 10, 2025",
-    img: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
-  },
-  {
-    id: 3,
-    title: "Node.js Developer",
-    date: "Mar 12, 2025",
-    img: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg",
-  },
-];
-
-const allBadges = [
-  {
-    id: 4,
-    title: "Frontend Specialist",
-    date: "Apr 20, 2025",
-    img: "https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg",
-  },
-  {
-    id: 5,
-    title: "Backend Engineer",
-    date: "May 15, 2025",
-    img: "https://cdn.worldvectorlogo.com/logos/express-109.svg",
-  },
-  {
-    id: 6,
-    title: "Database Pro",
-    date: "Jun 1, 2025",
-    img: "https://upload.wikimedia.org/wikipedia/en/d/dd/MySQL_logo.svg",
-  },
-  {
-    id: 7,
-    title: "Git & GitHub Expert",
-    date: "Jul 10, 2025",
-    img: "https://upload.wikimedia.org/wikipedia/commons/3/3f/Git_icon.svg",
-  },
-  {
-    id: 8,
-    title: "UI/UX Enthusiast",
-    date: "Aug 25, 2025",
-    img: "https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg",
-  },
-];
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../../AuthContext";
 
 export default function Achievement() {
+  const { user } = useAuth();
+  const [badges, setBadges] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBadges = async () => {
+      try {
+        const res = await fetch(`http://127.0.0.1:8000/badges/${user.user_id}`);
+        const data = await res.json();
+        setBadges(data);
+      } catch (err) {
+        console.error("Error fetching badges:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (user?.user_id) fetchBadges();
+  }, [user]);
+
+  // Use a generic placeholder icon for badges since we have no images in db
+  const badgeIconUrl = "https://upload.wikimedia.org/wikipedia/commons/e/e4/Star_empty.svg";
+
   return (
-    <div className="h-full bg-white px-8 py-10">
-      {/* Favorite Badges Section */}
-      <div>
-        <h1 className="text-2xl font-semibold mb-4">Favorite Badges</h1>
-        <div className="flex flex-wrap gap-6">
-          {favoriteBadges.map((badge) => (
-            <div
-              key={badge.id}
-              className="w-36 flex flex-col items-center bg-white border rounded-xl shadow-sm hover:shadow-md transition p-3"
-            >
-              <img
-                src={badge.img}
-                alt={badge.title}
-                className="w-20 h-20 object-contain rounded-full mb-2"
-              />
-              <p className="text-sm font-medium text-center">{badge.title}</p>
-              <p className="text-xs text-gray-500 mt-1">{badge.date}</p>
-            </div>
-          ))}
-
-          {/* Add badge placeholders */}
-          <div className="w-36 h-40 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl text-gray-400">
-            + Add a badge
-          </div>
-          <div className="w-36 h-40 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl text-gray-400">
-            + Add a badge
-          </div>
-        </div>
+    <div className="p-10 max-w-7xl mx-auto h-full bg-[#0a0a0a]">
+      <div className="border-b-2 border-neutral-800 pb-4 mb-8">
+        <h1 className="text-4xl font-serif font-black tracking-tight text-white">
+          Credentials & Badges
+        </h1>
+        <p className="font-mono text-xs tracking-widest text-gray-500 uppercase mt-2">
+          Your validated operative skills and achievements
+        </p>
       </div>
 
-      {/* Divider */}
-      <hr className="my-10 border-gray-300" />
-
-      {/* All Badges Section */}
-      <div>
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">Badges</h2>
-          <button className="text-sm text-blue-600 font-medium hover:underline">
-            Sort by ↑↓
-          </button>
+      {loading ? (
+        <div className="text-center font-mono text-sm uppercase tracking-widest text-gray-500 py-20">
+          Loading Credentials...
         </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-          {allBadges.map((badge) => (
-            <div
-              key={badge.id}
-              className="flex flex-col items-center bg-white border rounded-xl shadow-sm hover:shadow-md transition p-3"
-            >
-              <img
-                src={badge.img}
-                alt={badge.title}
-                className="w-20 h-20 object-contain rounded-full mb-2"
-              />
-              <p className="text-sm font-medium text-center">{badge.title}</p>
-              <p className="text-xs text-gray-500 mt-1">{badge.date}</p>
+      ) : (
+        <div>
+          {badges.length === 0 ? (
+            <div className="p-16 border-2 border-dashed border-[#444] text-center bg-black">
+              <p className="font-serif text-xl font-bold text-gray-400 mb-2">No Credentials Acquired Yet</p>
+              <p className="font-sans text-sm text-gray-500">
+                Complete phase operations and validate your skills to earn credentials.
+              </p>
             </div>
-          ))}
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+              {badges.map((badge, index) => (
+                <div
+                  key={index}
+                  className="p-6 bg-black border border-neutral-800 flex flex-col items-center justify-center text-center hover:bg-black hover:text-white transition-colors duration-300 group"
+                >
+                  <div className="w-16 h-16 mb-4 flex items-center justify-center border-2 border-neutral-800 rounded-full group-hover:border-white transition-colors duration-300 bg-black">
+                    <img
+                      src={badgeIconUrl}
+                      alt="Badge Icon"
+                      className="w-8 h-8 opacity-80"
+                    />
+                  </div>
+                  <h3 className="font-serif font-bold text-lg mb-1 leading-tight group-hover:text-white text-white">
+                    {badge.name}
+                  </h3>
+                  <p className="font-mono text-[9px] uppercase tracking-widest text-gray-400 group-hover:text-gray-300 mt-2">
+                    {new Date(badge.earned_at).toLocaleDateString()}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-      </div>
+      )}
     </div>
   );
 }

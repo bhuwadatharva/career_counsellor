@@ -47,7 +47,7 @@ export default function Performance() {
   return (
     <div className="p-6 flex flex-col gap-6 w-full overflow-y-auto">
       {/* Subject-wise Performance */}
-      <div className="bg-white p-5 rounded-xl shadow">
+      <div className="bg-black p-5 rounded-xl shadow">
         <h2 className="text-lg font-semibold mb-3 text-[#2563EB]">
           Subject-wise Performance
         </h2>
@@ -58,14 +58,14 @@ export default function Performance() {
             <Bar dataKey="score" fill="#2563EB" radius={[8, 8, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
-        <p className="text-sm text-gray-600 mt-3">
+        <p className="text-sm text-gray-400 mt-3">
           You are **strong** in <b>Data Analysis & Python</b>. You may need
           improvement in <b>Machine Learning</b>.
         </p>
       </div>
 
       {/* Predicted Growth */}
-      <div className="bg-white p-5 rounded-xl shadow">
+      <div className="bg-black p-5 rounded-xl shadow">
         <h2 className="text-lg font-semibold mb-3 text-[#2563EB]">
           Predicted Growth (Next 5 Months)
         </h2>
@@ -82,7 +82,7 @@ export default function Performance() {
             />
           </LineChart>
         </ResponsiveContainer>
-        <p className="text-sm text-gray-600 mt-3">
+        <p className="text-sm text-gray-400 mt-3">
           Your learning curve shows **steady improvement**. If you maintain
           consistency, you are projected to reach a strong professional skill
           level soon.
@@ -90,7 +90,7 @@ export default function Performance() {
       </div>
 
       {/* Skill Radar Chart */}
-      <div className="bg-white p-5 rounded-xl shadow">
+      <div className="bg-black p-5 rounded-xl shadow">
         <h2 className="text-lg font-semibold mb-3 text-[#2563EB]">
           Strength / Weakness Breakdown
         </h2>
@@ -106,18 +106,18 @@ export default function Performance() {
             />
           </RadarChart>
         </ResponsiveContainer>
-        <p className="text-sm text-gray-600 mt-3">
+        <p className="text-sm text-gray-400 mt-3">
           Strength Area: <b>Problem Solving & Adaptability</b>
           Needs Practice: <b>Creativity & Communication</b>
         </p>
       </div>
 
       {/* Competitions & Achievements */}
-      <div className="bg-white p-5 rounded-xl shadow">
+      <div className="bg-black p-5 rounded-xl shadow">
         <h2 className="text-lg font-semibold mb-4 text-[#2563EB]">
           Past Competition Performance
         </h2>
-        <ul className="space-y-2 text-gray-700 text-sm">
+        <ul className="space-y-2 text-gray-300 text-sm">
           {competitions.map((comp, i) => (
             <li key={i} className="flex justify-between border-b pb-2">
               <span>{comp.name}</span>
@@ -126,7 +126,7 @@ export default function Performance() {
           ))}
         </ul>
 
-        <p className="text-sm text-gray-600 mt-3">
+        <p className="text-sm text-gray-400 mt-3">
           You have shown **consistent performance** in competitive settings,
           proving readiness for real-world challenges.
         </p>

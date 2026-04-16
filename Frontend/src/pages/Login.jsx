@@ -49,7 +49,7 @@ const Login = () => {
 
   return (
     <div className="h-screen flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl shadow-2xl p-10 w-full max-w-md text-center">
+      <div className="bg-black rounded-2xl shadow-2xl p-10 w-full max-w-md text-center">
         <h1 className="text-3xl font-bold mb-6">Login</h1>
 
         <input
@@ -70,13 +70,13 @@ const Login = () => {
 
         <button
           onClick={handleLogin}
-          className="w-full bg-blue-600 text-white py-3 rounded"
+          className="w-full bg-black text-white py-3 rounded"
         >
           Login
         </button>
 
         {loading && <p className="mt-3">Loading...</p>}
-        {error && <p className="text-red-500 mt-3">{error}</p>}
+        {error && <p className="text-gray-400 mt-3">{error}</p>}
       </div>
     </div>
   );

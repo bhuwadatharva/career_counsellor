@@ -103,13 +103,13 @@ const Main = () => {
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   return (
-    <section className="relative w-full bg-white py-16">
+    <section className="relative w-full bg-black py-16">
       <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-8 md:px-16 lg:px-20 relative">
         {/* Heading */}
         <h1 className="text-3xl sm:text-5xl text-center font-bold text-[#0A2239] mb-6">
           Empower Your Career with AI Tools
         </h1>
-        <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
+        <p className="text-center text-gray-400 max-w-2xl mx-auto mb-12">
           Take charge of your future with AI-powered tools for career guidance,
           skill building, and job readiness.
         </p>

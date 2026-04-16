@@ -10,10 +10,10 @@ export const Sidebar = ({ onLinkClick }) => {
   const { user, logout } = useAuth();
 
   const baseClasses =
-    "p-3 flex items-center gap-3 text-[15px] rounded-md font-medium transition-all";
-  const activeClass = "bg-indigo-100 text-indigo-600 shadow-sm";
+    "px-4 py-3 flex items-center gap-3 text-[15px] rounded border border-transparent font-medium transition-all duration-300";
+  const activeClass = "bg-black text-white shadow font-semibold";
   const inactiveClass =
-    "text-slate-600 hover:bg-slate-100 hover:text-slate-800";
+    "text-gray-400 hover:bg-[#1a1a1a] hover:text-white hover:border-[#444]";
 
   const handleClick = () => onLinkClick && onLinkClick();
 
@@ -29,8 +29,8 @@ export const Sidebar = ({ onLinkClick }) => {
   };
 
   return (
-    <div className="flex flex-col h-full py-4 select-none justify-between">
-      <nav className="flex flex-col space-y-1 text-[15px]">
+    <div className="flex flex-col h-full py-4 select-none justify-between h-full">
+      <nav className="flex flex-col space-y-2 mt-2 text-[15px] px-2">
         <NavLink
           to="/dashboard"
           className={({ isActive }) =>
@@ -99,13 +99,15 @@ export const Sidebar = ({ onLinkClick }) => {
       </nav>
 
       {/* ✅ Logout Button */}
-      <button
-        onClick={logout}
-        className="w-full flex items-center gap-2 mt-2 px-3 py-2 text-sm font-medium text-red-600 rounded-md hover:bg-red-100 transition"
-      >
-        <FiLogOut size={18} />
-        Logout
-      </button>
+      <div className="px-2 mt-4">
+        <button
+          onClick={logout}
+          className="w-full flex items-center gap-2 px-4 py-3 text-[15px] font-medium text-white border border-neutral-800 rounded hover:bg-black hover:text-white transition-all duration-300"
+        >
+          <FiLogOut size={18} />
+          Logout
+        </button>
+      </div>
     </div>
   );
 };

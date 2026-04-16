@@ -38,7 +38,7 @@ const Register = () => {
 
   return (
     <div className="h-screen flex items-center justify-center">
-      <div className="bg-white p-8 rounded shadow w-96">
+      <div className="bg-black p-8 rounded shadow w-96">
         <h2 className="text-2xl mb-4">Register</h2>
 
         <input
@@ -65,12 +65,12 @@ const Register = () => {
 
         <button
           onClick={handleRegister}
-          className="w-full bg-green-600 text-white py-2"
+          className="w-full bg-black text-white py-2"
         >
           Register
         </button>
 
-        {error && <p className="text-red-500">{error}</p>}
+        {error && <p className="text-gray-400">{error}</p>}
       </div>
     </div>
   );

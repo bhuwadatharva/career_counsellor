@@ -8,14 +8,14 @@ const STYLES = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap');
 
   .db-root {
-    --db-bg: #fafafa;
-    --db-fg: #0a0a0a;
-    --db-mid: #6b6b6b;
-    --db-border: #e0e0e0;
-    --db-accent: #0a0a0a;
-    --db-tag-bg: #f0f0f0;
-    --db-hover-bg: #0a0a0a;
-    --db-hover-fg: #fafafa;
+    --db-bg: #000000;
+    --db-fg: #ffffff;
+    --db-mid: #888888;
+    --db-border: #333333;
+    --db-accent: #111111;
+    --db-tag-bg: #222222;
+    --db-hover-bg: #1a1a1a;
+    --db-hover-fg: #ffffff;
     --db-serif: 'Playfair Display', Georgia, serif;
     --db-mono: 'DM Mono', 'Courier New', monospace;
     --db-sans: 'DM Sans', sans-serif;
@@ -101,13 +101,13 @@ const STYLES = `
     margin-bottom: 40px;
   }
   .db-stat {
-    background: var(--db-bg);
+    background: var(--db-accent);
     padding: 28px 26px;
     position: relative;
     transition: background 0.2s ease;
   }
   .db-stat:hover {
-    background: #f5f5f5;
+    background: var(--db-hover-bg);
   }
   .db-stat-label {
     font-family: var(--db-mono);
@@ -188,7 +188,7 @@ const STYLES = `
     right: 20px;
     font-family: var(--db-serif);
     font-size: 120px;
-    color: #f0f0f0;
+    color: #222222;
     line-height: 1;
     pointer-events: none;
     user-select: none;
@@ -196,7 +196,7 @@ const STYLES = `
   .db-overview-text {
     font-size: 14px;
     line-height: 1.75;
-    color: #3a3a3a;
+    color: #cccccc;
     font-weight: 300;
     position: relative;
     z-index: 1;
@@ -232,11 +232,11 @@ const STYLES = `
     padding: 22px 26px;
     cursor: pointer;
     user-select: none;
-    background: var(--db-bg);
+    background: var(--db-accent);
     transition: background 0.15s ease;
   }
   .db-phase-head:hover {
-    background: #f7f7f7;
+    background: var(--db-hover-bg);
   }
   .db-phase-num {
     font-family: var(--db-mono);
@@ -265,7 +265,7 @@ const STYLES = `
     display: none;
     padding: 0 26px 26px;
     border-top: 1px solid var(--db-border);
-    background: #fefefe;
+    background: var(--db-bg);
     animation: db-slide-in 0.2s ease;
   }
   .db-phase-body.open {
@@ -299,8 +299,8 @@ const STYLES = `
     font-weight: 300;
     line-height: 1.6;
     padding: 5px 0;
-    border-bottom: 1px solid #f0f0f0;
-    color: #2a2a2a;
+    border-bottom: 1px solid var(--db-border);
+    color: #dddddd;
   }
   .db-phase-list li:last-child {
     border-bottom: none;
@@ -341,8 +341,8 @@ const STYLES = `
     align-items: center;
     justify-content: space-between;
     padding: 20px 28px;
-    background: var(--db-bg);
-    color: var(--db-fg);
+    background: var(--db-fg);
+    color: var(--db-bg);
     border: 1.5px solid var(--db-fg);
     border-radius: 4px;
     cursor: pointer;
@@ -359,7 +359,7 @@ const STYLES = `
     position: absolute;
     top: 0; left: -100%;
     width: 100%; height: 100%;
-    background: var(--db-fg);
+    background: #000;
     transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 0;
   }
@@ -367,7 +367,7 @@ const STYLES = `
     left: 0;
   }
   .db-cta:hover {
-    color: var(--db-bg);
+    color: var(--db-fg);
   }
   .db-cta span, .db-cta-arrow {
     position: relative;

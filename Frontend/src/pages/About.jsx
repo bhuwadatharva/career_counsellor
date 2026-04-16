@@ -4,10 +4,10 @@ import about from "../assets/about/about.png";
 
 const About = () => {
   const iconClass =
-    "absolute text-black opacity-60 text-2xl transition-transform duration-300 hover:scale-125";
+    "absolute text-white opacity-60 text-2xl transition-transform duration-300 hover:scale-125";
 
   return (
-    <div className="bg-white min-h-screen flex flex-col md:flex-row items-center justify-center md:gap-60 sm:gap-20 px-6 md:px-6 py-16 relative overflow-hidden">
+    <div className="bg-black min-h-screen flex flex-col md:flex-row items-center justify-center md:gap-60 sm:gap-20 px-6 md:px-6 py-16 relative overflow-hidden">
       {/* Left Side Content */}
       <motion.div
         className="max-w-xl text-left space-y-6 z-10"
@@ -15,10 +15,10 @@ const About = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h1 className="text-3xl md:text-4xl font-semibold text-black leading-snug">
+        <h1 className="text-3xl md:text-4xl font-semibold text-white leading-snug">
           CareerPath Navigator <br /> Guiding You Toward Success
         </h1>
-        <p className="text-black text-base leading-relaxed">
+        <p className="text-white text-base leading-relaxed">
           At CareerPath Navigator, we believe every learner deserves clear
           guidance, the right resources, and a structured path to success. Our
           platform provides personalized career counseling, curated courses
@@ -30,7 +30,7 @@ const About = () => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition"
+          className="bg-black hover:bg-gray-800 text-white font-medium py-3 px-6 rounded-lg transition"
         >
           Learn More About Us
         </motion.button>

@@ -49,7 +49,7 @@ export default function Resources() {
   };
 
   return (
-    <div className="h-full bg-gray-50 p-8 overflow-y-auto">
+    <div className="h-full bg-[#111] p-8 overflow-y-auto">
       {/* Header */}
       {pathInfo && (
         <div className="bg-blue-950 text-white rounded-3xl p-8 mb-10 shadow-md">
@@ -66,7 +66,7 @@ export default function Resources() {
             </div>
             <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
               <div
-                className="bg-blue-400 h-2 rounded-full transition-all duration-300"
+                className="bg-gray-400 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${progress}%` }}
               ></div>
             </div>
@@ -79,7 +79,7 @@ export default function Resources() {
         {videos.map((video, index) => (
           <div
             key={index}
-            className="bg-white rounded-2xl p-4 shadow-sm border border-gray-200 hover:shadow-lg transition"
+            className="bg-black rounded-2xl p-4 shadow-sm border border-[#333] hover:shadow-lg transition"
           >
             <div className="aspect-video mb-3 rounded-xl overflow-hidden">
               <iframe
@@ -90,11 +90,11 @@ export default function Resources() {
               ></iframe>
             </div>
 
-            <h2 className="font-semibold text-lg text-gray-800 mb-1">
+            <h2 className="font-semibold text-lg text-gray-200 mb-1">
               {video.title}
             </h2>
 
-            <p className="text-gray-600 text-sm mb-3">{video.description}</p>
+            <p className="text-gray-400 text-sm mb-3">{video.description}</p>
 
             <p className="text-xs text-gray-400 mb-3">
               Duration: {video.duration}
@@ -108,7 +108,7 @@ export default function Resources() {
                 checked={completed.includes(index)}
                 onChange={() => handleComplete(index)}
               />
-              <span className="text-sm text-gray-700">Mark as Completed</span>
+              <span className="text-sm text-gray-300">Mark as Completed</span>
             </label>
           </div>
         ))}
@@ -117,18 +117,18 @@ export default function Resources() {
       {/* Completion Modal */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md">
-          <div className="bg-white p-6 rounded-2xl text-center w-80 shadow-lg">
-            <Check className="mx-auto text-green-600" size={45} />
-            <h2 className="mt-3 text-xl font-bold text-gray-800">
+          <div className="bg-black p-6 rounded-2xl text-center w-80 shadow-lg">
+            <Check className="mx-auto text-white" size={45} />
+            <h2 className="mt-3 text-xl font-bold text-gray-200">
               Congratulations!
             </h2>
-            <p className="mt-2 text-gray-600">
+            <p className="mt-2 text-gray-400">
               You have completed the {pathInfo?.title} learning path!
             </p>
 
             <button
               onClick={() => navigate("/task")}
-              className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full"
+              className="mt-4 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 w-full"
             >
               View Task
             </button>

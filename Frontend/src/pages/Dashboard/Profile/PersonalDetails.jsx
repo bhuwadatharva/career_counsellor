@@ -21,7 +21,7 @@ export default function PersonalDetails() {
           <input
             type="text"
             value={formData.firstName}
-            className="w-full border border-gray-300 rounded-xl p-2 text-sm"
+            className="w-full border border-[#444] rounded-xl p-2 text-sm"
             disabled
           />
         </div>
@@ -31,7 +31,7 @@ export default function PersonalDetails() {
           <input
             type="text"
             value={formData.lastName}
-            className="w-full border border-gray-300 rounded-xl p-2 text-sm"
+            className="w-full border border-[#444] rounded-xl p-2 text-sm"
             disabled
           />
         </div>
@@ -41,7 +41,7 @@ export default function PersonalDetails() {
           <input
             type="email"
             value={formData.email}
-            className="w-full border border-gray-300 rounded-xl p-2 text-sm"
+            className="w-full border border-[#444] rounded-xl p-2 text-sm"
             disabled
           />
         </div>
@@ -51,7 +51,7 @@ export default function PersonalDetails() {
           <input
             type="text"
             value={formData.mobile}
-            className="w-full border border-gray-300 rounded-xl p-2 text-sm"
+            className="w-full border border-[#444] rounded-xl p-2 text-sm"
             disabled
           />
         </div>
@@ -61,7 +61,7 @@ export default function PersonalDetails() {
           <input
             type="text"
             value={formData.college}
-            className="w-full border border-gray-300 rounded-xl p-2 text-sm"
+            className="w-full border border-[#444] rounded-xl p-2 text-sm"
             disabled
           />
         </div>
@@ -71,7 +71,7 @@ export default function PersonalDetails() {
           <input
             type="text"
             value={formData.degree}
-            className="w-full border border-gray-300 rounded-xl p-2 text-sm"
+            className="w-full border border-[#444] rounded-xl p-2 text-sm"
             disabled
           />
         </div>
@@ -81,7 +81,7 @@ export default function PersonalDetails() {
           <input
             type="text"
             value={formData.year}
-            className="w-full border border-gray-300 rounded-xl p-2 text-sm"
+            className="w-full border border-[#444] rounded-xl p-2 text-sm"
             disabled
           />
         </div>
@@ -91,7 +91,7 @@ export default function PersonalDetails() {
           <input
             type="text"
             value={formData.goal}
-            className="w-full border border-gray-300 rounded-xl p-2 text-sm"
+            className="w-full border border-[#444] rounded-xl p-2 text-sm"
             disabled
           />
         </div>

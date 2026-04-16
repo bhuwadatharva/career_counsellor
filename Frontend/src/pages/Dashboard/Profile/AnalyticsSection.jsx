@@ -56,9 +56,9 @@ export default function AnalyticsSection() {
       </div>
 
       {/* Course Completion Progress
-      <div className="bg-gray-50 border-2 border-gray-100 rounded-2xl p-4 md:p-6 shadow-lg">
-        <h3 className="text-base md:text-lg font-semibold mb-4 text-gray-800 flex items-center gap-2">
-          <FaBullseye className="text-red-500" /> Course Completion
+      <div className="bg-[#111] border-2 border-gray-100 rounded-2xl p-4 md:p-6 shadow-lg">
+        <h3 className="text-base md:text-lg font-semibold mb-4 text-gray-200 flex items-center gap-2">
+          <FaBullseye className="text-gray-400" /> Course Completion
         </h3>
         <div className="w-full bg-gray-200 rounded-full h-4 md:h-5 overflow-hidden">
           <div
@@ -66,18 +66,18 @@ export default function AnalyticsSection() {
             style={{ width: "72%" }}
           ></div>
         </div>
-        <p className="text-right mt-2 text-sm text-gray-600">72% Completed</p>
+        <p className="text-right mt-2 text-sm text-gray-400">72% Completed</p>
       </div> */}
 
       {/* Subject-wise Progress as Bars */}
-      <div className="bg-gray-50 border-2 border-gray-100 rounded-2xl p-4 md:p-6">
-        <h3 className="text-base md:text-lg font-semibold mb-4 md:mb-6 text-gray-800 flex items-center gap-2">
-          <FaBookOpen className="text-indigo-500" /> Subject-wise Progress
+      <div className="bg-[#111] border-2 border-gray-100 rounded-2xl p-4 md:p-6">
+        <h3 className="text-base md:text-lg font-semibold mb-4 md:mb-6 text-gray-200 flex items-center gap-2">
+          <FaBookOpen className="text-gray-400" /> Subject-wise Progress
         </h3>
         <div className="space-y-4 md:space-y-5">
           {subjectProgress.map((item, idx) => (
             <div key={idx} className="space-y-1">
-              <div className="flex justify-between text-sm font-medium text-gray-700">
+              <div className="flex justify-between text-sm font-medium text-gray-300">
                 <span>{item.subject}</span>
                 <span>{item.progress}%</span>
               </div>
