@@ -5,7 +5,7 @@ import os
 # 🔐 Use ENV variable (recommended)
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql+psycopg2://postgres:atharvbhuwad@db.weufmyheyhatcfzzztyu.supabase.co:5432/postgres"
+    "postgresql://postgres:atharvbhuwad@db.weufmyheyhatcfzzztyu.supabase.co:6543/postgres"
 )
 
 # 🚀 Engine with SSL + stability configs
