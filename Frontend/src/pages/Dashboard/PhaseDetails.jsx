@@ -9,7 +9,9 @@ export default function PhaseDetails() {
 
   // 🔥 FETCH PHASE DATA
   const fetchDetails = async () => {
-    const res = await fetch(`http://127.0.0.1:8000/phases/details/${phaseId}`);
+    const res = await fetch(
+      `https://career-counsellor-ha78.onrender.com/phases/details/${phaseId}`,
+    );
     const result = await res.json();
     setData(result);
   };
@@ -26,9 +28,12 @@ export default function PhaseDetails() {
 
   // ✅ COMPLETE SKILL
   const completeSkill = async (skillId) => {
-    await fetch(`http://127.0.0.1:8000/skills/complete/${skillId}`, {
-      method: "PUT",
-    });
+    await fetch(
+      `https://career-counsellor-ha78.onrender.com/skills/complete/${skillId}`,
+      {
+        method: "PUT",
+      },
+    );
     fetchDetails(); // 🔄 refresh UI
   };
 
@@ -60,20 +65,27 @@ export default function PhaseDetails() {
       </div>
 
       {/* 🎥 VIDEOS */}
-      <h2 className="text-sm font-mono tracking-widest uppercase text-gray-500 mb-4">📺 01 / Learn</h2>
+      <h2 className="text-sm font-mono tracking-widest uppercase text-gray-500 mb-4">
+        📺 01 / Learn
+      </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
         {data.resources.map((video, i) => {
           const videoId = getVideoId(video.url);
 
           return (
-            <div key={i} className="border border-[#333] p-4 rounded hover:border-neutral-800 transition-colors duration-300">
+            <div
+              key={i}
+              className="border border-[#333] p-4 rounded hover:border-neutral-800 transition-colors duration-300"
+            >
               <img
                 src={`https://img.youtube.com/vi/${videoId}/0.jpg`}
                 alt="thumbnail"
                 className="w-full rounded mb-3 grayscale hover:grayscale-0 transition-all duration-300"
               />
-              <h3 className="font-semibold text-lg font-serif">{video.title}</h3>
+              <h3 className="font-semibold text-lg font-serif">
+                {video.title}
+              </h3>
               <a
                 href={video.url}
                 target="_blank"
@@ -88,38 +100,58 @@ export default function PhaseDetails() {
       </div>
 
       {/* 💻 TASKS */}
-      <h2 className="text-sm font-mono tracking-widest uppercase text-gray-500 mb-4 mt-6">💻 02 / Tasks</h2>
+      <h2 className="text-sm font-mono tracking-widest uppercase text-gray-500 mb-4 mt-6">
+        💻 02 / Tasks
+      </h2>
       <div className="mb-10 p-6 border border-neutral-800 bg-[#111] flex flex-col gap-4">
         <p className="font-serif text-lg mb-4 text-white border-b border-[#444] pb-4">
           Apply your knowledge by completing the assigned tasks for this phase.
         </p>
-        {data.projects.map(project => (
-          <div key={project.id} className="flex flex-col md:flex-row items-start md:items-center justify-between border border-[#444] p-4 bg-black hover:border-neutral-800 transition-all">
+        {data.projects.map((project) => (
+          <div
+            key={project.id}
+            className="flex flex-col md:flex-row items-start md:items-center justify-between border border-[#444] p-4 bg-black hover:border-neutral-800 transition-all"
+          >
             <div>
-              <h3 className="font-semibold text-lg font-serif">{project.title}</h3>
+              <h3 className="font-semibold text-lg font-serif">
+                {project.title}
+              </h3>
               <p className="font-mono text-[10px] tracking-widest uppercase text-gray-500 mt-1">
-                Status: <span className={project.status === 'approved' ? 'text-white font-bold' : ''}>{project.status === 'approved' ? 'Completed' : 'Pending'}</span>
+                Status:{" "}
+                <span
+                  className={
+                    project.status === "approved" ? "text-white font-bold" : ""
+                  }
+                >
+                  {project.status === "approved" ? "Completed" : "Pending"}
+                </span>
               </p>
             </div>
             <button
               onClick={() => navigate(`/task/${phaseId}/${project.id}`)}
               className="mt-4 md:mt-0 bg-black text-white px-6 py-2 font-mono text-xs tracking-widest uppercase hover:bg-gray-800 transition-colors"
             >
-              {project.status === 'approved' ? 'Review Task' : 'Submit Task'} →
+              {project.status === "approved" ? "Review Task" : "Submit Task"} →
             </button>
           </div>
         ))}
       </div>
 
       {/* ✅ SKILLS */}
-      <h2 className="text-sm font-mono tracking-widest uppercase text-gray-500 mb-4 mt-2">✅ 03 / Skills & Validation</h2>
+      <h2 className="text-sm font-mono tracking-widest uppercase text-gray-500 mb-4 mt-2">
+        ✅ 03 / Skills & Validation
+      </h2>
       <p className="text-gray-400 mb-4 text-sm font-sans">
-        After completing your task, validate your acquired skills below to complete this phase.
+        After completing your task, validate your acquired skills below to
+        complete this phase.
       </p>
 
       <div className="flex flex-col gap-3 mb-12">
         {data.skills.map((skill) => (
-          <label key={skill.id} className="flex items-center gap-4 p-3 border border-[#333] cursor-pointer hover:border-neutral-800 transition-colors rounded">
+          <label
+            key={skill.id}
+            className="flex items-center gap-4 p-3 border border-[#333] cursor-pointer hover:border-neutral-800 transition-colors rounded"
+          >
             <input
               type="checkbox"
               className="w-5 h-5 accent-black cursor-pointer"
@@ -129,7 +161,9 @@ export default function PhaseDetails() {
             />
             <span
               className={`font-medium ${
-                skill.status === "completed" ? "line-through text-gray-400" : "text-white"
+                skill.status === "completed"
+                  ? "line-through text-gray-400"
+                  : "text-white"
               }`}
             >
               {skill.name}

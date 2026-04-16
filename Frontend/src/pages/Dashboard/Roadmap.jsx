@@ -12,7 +12,9 @@ export default function Roadmap() {
   useEffect(() => {
     const fetchPhases = async () => {
       try {
-        const res = await fetch(`http://127.0.0.1:8000/phases/${user.user_id}`);
+        const res = await fetch(
+          `https://career-counsellor-ha78.onrender.com/phases/${user.user_id}`,
+        );
         const data = await res.json();
         setPhases(data);
       } catch (err) {
@@ -50,10 +52,16 @@ export default function Roadmap() {
             }`}
           >
             {/* Status indicator line element */}
-            <div className={`absolute top-0 left-0 w-1 h-full ${
-              phase.status === 'completed' ? 'bg-black' : phase.status === 'active' ? 'bg-gray-400' : 'bg-transparent'
-            }`} />
-                
+            <div
+              className={`absolute top-0 left-0 w-1 h-full ${
+                phase.status === "completed"
+                  ? "bg-black"
+                  : phase.status === "active"
+                    ? "bg-gray-400"
+                    : "bg-transparent"
+              }`}
+            />
+
             <span className="font-mono text-[10px] tracking-widest uppercase border border-[#444] px-2 py-1 bg-black text-white mb-4 inline-block">
               Phase {String(phase.phase_number).padStart(2, "0")}
             </span>
@@ -69,8 +77,8 @@ export default function Roadmap() {
                   phase.status === "completed"
                     ? "text-white border-neutral-800"
                     : phase.status === "active"
-                    ? "text-white border-dashed border-neutral-800"
-                    : "text-gray-400 border-[#444]"
+                      ? "text-white border-dashed border-neutral-800"
+                      : "text-gray-400 border-[#444]"
                 }`}
               >
                 {phase.status}

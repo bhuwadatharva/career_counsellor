@@ -9,7 +9,9 @@ export default function Achievement() {
   useEffect(() => {
     const fetchBadges = async () => {
       try {
-        const res = await fetch(`http://127.0.0.1:8000/badges/${user.user_id}`);
+        const res = await fetch(
+          `https://career-counsellor-ha78.onrender.com/badges/${user.user_id}`,
+        );
         const data = await res.json();
         setBadges(data);
       } catch (err) {
@@ -23,7 +25,7 @@ export default function Achievement() {
   }, [user]);
 
   // Use a generic placeholder icon for badges since we have no images in db
-  const badgeIconUrl = "https://upload.wikimedia.org/wikipedia/commons/e/e4/Star_empty.svg";
+  const badgeIconUrl = "https://cdn-icons-png.flaticon.com/512/616/616490.png";
 
   return (
     <div className="p-10 max-w-7xl mx-auto h-full bg-[#0a0a0a]">
@@ -44,9 +46,12 @@ export default function Achievement() {
         <div>
           {badges.length === 0 ? (
             <div className="p-16 border-2 border-dashed border-[#444] text-center bg-black">
-              <p className="font-serif text-xl font-bold text-gray-400 mb-2">No Credentials Acquired Yet</p>
+              <p className="font-serif text-xl font-bold text-gray-400 mb-2">
+                No Credentials Acquired Yet
+              </p>
               <p className="font-sans text-sm text-gray-500">
-                Complete phase operations and validate your skills to earn credentials.
+                Complete phase operations and validate your skills to earn
+                credentials.
               </p>
             </div>
           ) : (

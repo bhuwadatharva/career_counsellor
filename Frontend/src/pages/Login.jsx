@@ -24,13 +24,14 @@ const Login = () => {
       setError(null);
 
       const res = await fetch(
-        `http://127.0.0.1:8000/auth/login?email=${form.email}&password=${form.password}`,
-        { method: "POST" }
+        `https://career-counsellor-ha78.onrender.com/auth/login?email=${form.email}&password=${form.password}`,
+        { method: "POST" },
       );
 
       const data = await res.json();
 
-      if (!res.ok) throw new Error(data.detail || "Authentication sequence failed");
+      if (!res.ok)
+        throw new Error(data.detail || "Authentication sequence failed");
 
       // 🔥 STORE USER
       login({ user_id: data.user_id });
@@ -48,11 +49,15 @@ const Login = () => {
         {/* Decorative corner accents */}
         <div className="absolute -top-4 -left-4 w-8 h-8 border-t border-l border-neutral-700 pointer-events-none" />
         <div className="absolute -bottom-4 -right-4 w-8 h-8 border-b border-r border-neutral-700 pointer-events-none" />
-        
+
         <div className="bg-[#050505] border border-neutral-800 p-10 sm:p-12">
           <div className="mb-10 text-center">
-            <p className="font-mono text-[10px] tracking-widest text-neutral-500 uppercase mb-2">Access Portal</p>
-            <h1 className="text-3xl font-serif font-bold text-white tracking-tight">User Login</h1>
+            <p className="font-mono text-[10px] tracking-widest text-neutral-500 uppercase mb-2">
+              Access Portal
+            </p>
+            <h1 className="text-3xl font-serif font-bold text-white tracking-tight">
+              User Login
+            </h1>
           </div>
 
           <div className="space-y-5">
@@ -98,7 +103,13 @@ const Login = () => {
 
             <div className="mt-8 text-center border-t border-neutral-900 pt-6">
               <p className="font-mono text-[10px] tracking-widest text-neutral-500 uppercase">
-                Awaiting authorization? <button onClick={() => navigate('/register')} className="text-white hover:underline underline-offset-4 ml-1">Register</button>
+                Awaiting authorization?{" "}
+                <button
+                  onClick={() => navigate("/register")}
+                  className="text-white hover:underline underline-offset-4 ml-1"
+                >
+                  Register
+                </button>
               </p>
             </div>
           </div>

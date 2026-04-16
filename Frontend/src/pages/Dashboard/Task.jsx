@@ -13,11 +13,15 @@ export default function Task() {
   useEffect(() => {
     const fetchPhaseDetails = async () => {
       try {
-        const res = await fetch(`http://127.0.0.1:8000/phases/details/${phaseId}`);
+        const res = await fetch(
+          `https://career-counsellor-ha78.onrender.com/phases/details/${phaseId}`,
+        );
         const result = await res.json();
-        
+
         if (result.projects && result.projects.length > 0) {
-          const found = result.projects.find(p => p.id === parseInt(projectId));
+          const found = result.projects.find(
+            (p) => p.id === parseInt(projectId),
+          );
           if (found) {
             setProject(found);
           }
@@ -32,27 +36,29 @@ export default function Task() {
   const handleSubmit = async () => {
     if (!submissionUrl.trim()) return alert("Please provide your project link");
     if (!project) return;
-    
+
     setLoading(true);
 
     try {
       await fetch(
-        `http://127.0.0.1:8000/projects/submit/${project.id}?link=${encodeURIComponent(submissionUrl)}`,
-        { method: "PUT" }
+        `https://career-counsellor-ha78.onrender.com/projects/submit/${project.id}?link=${encodeURIComponent(submissionUrl)}`,
+        { method: "PUT" },
       );
 
       // Auto approve for MVP
-      await fetch(`http://127.0.0.1:8000/projects/approve/${project.id}`, {
-        method: "PUT",
-      });
+      await fetch(
+        `https://career-counsellor-ha78.onrender.com/projects/approve/${project.id}`,
+        {
+          method: "PUT",
+        },
+      );
 
       setShowPopup(true);
-      
+
       setTimeout(() => {
         setShowPopup(false);
         navigate(`/phase/${phaseId}`);
       }, 2500);
-
     } catch (err) {
       console.error(err);
       alert("Error submitting task");
@@ -74,27 +80,36 @@ export default function Task() {
       <div className="max-w-3xl w-full bg-black rounded-none shadow-sm border border-neutral-800 p-10 animate-fadeIn">
         {/* Task Header */}
         <div className="border-b-2 border-neutral-800 pb-4 mb-6">
-          <p className="font-mono text-[10px] tracking-widest text-gray-500 uppercase mb-2">Phase Task</p>
+          <p className="font-mono text-[10px] tracking-widest text-gray-500 uppercase mb-2">
+            Phase Task
+          </p>
           <h1 className="text-3xl font-serif font-bold text-white">
             {project.title}
           </h1>
         </div>
-        
+
         <p className="text-gray-400 mt-1 text-sm font-sans mb-8">
-          Complete this task securely to validate your competencies and unlock subsequent phases.
+          Complete this task securely to validate your competencies and unlock
+          subsequent phases.
         </p>
 
         {/* Task Description */}
         <div className="mt-6 p-6 border border-[#333] bg-[#111] mb-8">
-          <h2 className="text-sm font-mono tracking-widest uppercase text-white mb-3 border-b border-[#333] pb-2">Task Requirements</h2>
-          
+          <h2 className="text-sm font-mono tracking-widest uppercase text-white mb-3 border-b border-[#333] pb-2">
+            Task Requirements
+          </h2>
+
           <p className="text-white font-sans leading-relaxed text-sm mb-4">
-            Follow the established blueprint to execute this project. Ensure your code is hosted in a public repository or deployed live for assessment.
+            Follow the established blueprint to execute this project. Ensure
+            your code is hosted in a public repository or deployed live for
+            assessment.
           </p>
 
           <p className="text-gray-400 mt-2 font-sans text-sm">
-            Status: 
-            <span className={`ml-2 font-mono text-[11px] uppercase tracking-wider px-2 py-1 bg-[#1a1a1a] border ${project.status === 'approved' ? 'border-green-600 text-white' : 'border-[#444] text-white'}`}>
+            Status:
+            <span
+              className={`ml-2 font-mono text-[11px] uppercase tracking-wider px-2 py-1 bg-[#1a1a1a] border ${project.status === "approved" ? "border-green-600 text-white" : "border-[#444] text-white"}`}
+            >
               {project.status === "approved" ? "Completed" : "Pending"}
             </span>
           </p>
@@ -117,7 +132,9 @@ export default function Task() {
           </div>
         ) : (
           <div className="mt-6 p-4 bg-[#1a1a1a] border border-[#444] text-center">
-            <p className="text-white font-mono text-sm tracking-widest uppercase">Task already completed.</p>
+            <p className="text-white font-mono text-sm tracking-widest uppercase">
+              Task already completed.
+            </p>
           </div>
         )}
 

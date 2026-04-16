@@ -21,15 +21,19 @@ const Register = () => {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch("http://127.0.0.1:8000/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+      const res = await fetch(
+        "https://career-counsellor-ha78.onrender.com/auth/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+        },
+      );
 
       const data = await res.json();
 
-      if (!res.ok) throw new Error(data.detail || "Registration sequence failed");
+      if (!res.ok)
+        throw new Error(data.detail || "Registration sequence failed");
 
       navigate("/login");
     } catch (err) {
@@ -45,11 +49,15 @@ const Register = () => {
         {/* Decorative corner accents */}
         <div className="absolute -top-4 -left-4 w-8 h-8 border-t border-l border-neutral-700 pointer-events-none" />
         <div className="absolute -bottom-4 -right-4 w-8 h-8 border-b border-r border-neutral-700 pointer-events-none" />
-        
+
         <div className="bg-[#050505] border border-neutral-800 p-10 sm:p-12">
           <div className="mb-10 text-center">
-            <p className="font-mono text-[10px] tracking-widest text-neutral-500 uppercase mb-2">Registration Portal</p>
-            <h1 className="text-3xl font-serif font-bold text-white tracking-tight">User Registration</h1>
+            <p className="font-mono text-[10px] tracking-widest text-neutral-500 uppercase mb-2">
+              Registration Portal
+            </p>
+            <h1 className="text-3xl font-serif font-bold text-white tracking-tight">
+              User Registration
+            </h1>
           </div>
 
           <div className="space-y-5">
@@ -106,7 +114,13 @@ const Register = () => {
 
             <div className="mt-8 text-center border-t border-neutral-900 pt-6">
               <p className="font-mono text-[10px] tracking-widest text-neutral-500 uppercase">
-                Already registered? <button onClick={() => navigate('/login')} className="text-white hover:underline underline-offset-4 ml-1">Login</button>
+                Already registered?{" "}
+                <button
+                  onClick={() => navigate("/login")}
+                  className="text-white hover:underline underline-offset-4 ml-1"
+                >
+                  Login
+                </button>
               </p>
             </div>
           </div>
