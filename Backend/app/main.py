@@ -9,7 +9,7 @@ app = FastAPI(title="AI Career Counsellor API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://career-counsellor-2-h3c8.onrender.com", "http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
