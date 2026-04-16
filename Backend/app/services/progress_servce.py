@@ -5,38 +5,26 @@ from app.models.phase import Phase
 from app.models.skill import Skill
 from app.models.project import Project
 from app.models.progress import UserProgress
+from app.services.badge_service import create_and_assign_badge
 
 
 # ✅ CHECK & COMPLETE PHASE
 def check_and_complete_phase(db: Session, phase_id: int):
 
-    try:
-        phase = db.query(Phase).filter_by(id=phase_id).first()
+    phase = db.query(Phase).filter_by(id=phase_id).first()
+    if not phase:
+        return
 
-        if not phase:
-            return None
+    projects = db.query(Project).filter_by(phase_id=phase_id).all()
 
-        skills = db.query(Skill).filter_by(phase_id=phase_id).all()
-        projects = db.query(Project).filter_by(phase_id=phase_id).all()
+    all_approved = all(p.status == "approved" for p in projects)
 
-        # ✅ check completion
-        skills_done = all(s.status == "completed" for s in skills)
-        projects_done = all(p.status == "approved" for p in projects)
+    if all_approved and phase.status != "completed":
+        phase.status = "completed"
+        db.commit()
 
-        if skills_done and projects_done:
-            phase.status = "completed"
-            db.commit()
-
-            # 🔓 unlock next phase
-            unlock_next_phase(db, phase)
-
-            return phase
-
-        return None
-
-    except SQLAlchemyError as e:
-        db.rollback()
-        raise Exception(f"Phase completion error: {str(e)}")
+        # 🔥 auto-create badge and assign to user
+        create_and_assign_badge(db, phase_id)
 
 
 # 🔓 UNLOCK NEXT PHASE
