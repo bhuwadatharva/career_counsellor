@@ -30,9 +30,9 @@ const About = () => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
-          className="bg-black hover:bg-gray-800 text-white font-medium py-3 px-6 rounded-lg transition"
+          className="bg-white text-black font-mono text-xs uppercase tracking-widest py-3 px-8 rounded-sm hover:bg-gray-200 transition-colors mt-4 font-semibold"
         >
-          Learn More About Us
+          Initialize Protocol
         </motion.button>
       </motion.div>
 

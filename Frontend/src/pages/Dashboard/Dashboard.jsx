@@ -476,6 +476,7 @@ export default function Dashboard() {
           `http://127.0.0.1:8000/auth/is-first-time/${user.user_id}`,
         );
         const d = await res.json();
+        console.log(d)
         if (d.is_first_time) {
           setShowModal(true);
         } else {
@@ -506,7 +507,7 @@ export default function Dashboard() {
     }
   };
 
-  if (!data) {
+  if (!data && !showModal) {
     return (
       <>
         <style>{STYLES}</style>
@@ -535,117 +536,126 @@ export default function Dashboard() {
           />
         )}
 
-        <div className="db-shell">
-          {/* ── Masthead ── */}
-          <div className="db-masthead">
-            <div className="db-masthead-left">
-              <p className="db-eyebrow">Career Intelligence Report</p>
-              <h1 className="db-name">
-                {users?.name?.split(" ")[0]},<br />
-                {users?.name?.split(" ").slice(1).join(" ")}
-              </h1>
-              <p className="db-goal">{data.career_goal}</p>
-            </div>
-            <div className="db-masthead-right">
-              <span className="db-badge">Career Counsellor v2</span>
-              <span className="db-version">
-                {new Date()
-                  .toLocaleDateString("en-GB", {
-                    day: "2-digit",
-                    month: "short",
-                    year: "numeric",
-                  })
-                  .toUpperCase()}
-              </span>
-            </div>
-          </div>
-
-          {/* ── Stats ── */}
-          <div className="db-stats">
-            <div className="db-stat">
-              <p className="db-stat-label">Confidence Score</p>
-              <p className="db-stat-value">
-                {(data.confidence_score * 100).toFixed(0)}
-                <span
-                  style={{
-                    fontSize: 18,
-                    fontFamily: "var(--db-mono)",
-                    fontWeight: 400,
-                  }}
-                >
-                  %
+        {data ? (
+          <div className="db-shell">
+            {/* ── Masthead ── */}
+            <div className="db-masthead">
+              <div className="db-masthead-left">
+                <p className="db-eyebrow">Career Intelligence Report</p>
+                <h1 className="db-name">
+                  {users?.name?.split(" ")[0]},<br />
+                  {users?.name?.split(" ").slice(1).join(" ")}
+                </h1>
+                <p className="db-goal">{data.career_goal}</p>
+              </div>
+              <div className="db-masthead-right">
+                <span className="db-badge">Career Counsellor v2</span>
+                <span className="db-version">
+                  {new Date()
+                    .toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    })
+                    .toUpperCase()}
                 </span>
-              </p>
-              <p className="db-stat-sub">AI-assessed readiness</p>
-            </div>
-
-            <div className="db-stat">
-              <p className="db-stat-label">Recommended Domain</p>
-              <p
-                className="db-stat-value"
-                style={{ fontSize: "clamp(16px, 2.2vw, 22px)", marginTop: 6 }}
-              >
-                {data.recommended_domain}
-              </p>
-              <p className="db-stat-sub">Primary career vector</p>
-            </div>
-
-            <div className="db-stat">
-              <p className="db-stat-label">Overall Progress</p>
-              <p className="db-stat-value">
-                {progress}
-                <span
-                  style={{
-                    fontSize: 18,
-                    fontFamily: "var(--db-mono)",
-                    fontWeight: 400,
-                  }}
-                >
-                  %
-                </span>
-              </p>
-              <div className="db-prog-track">
-                <div
-                  className="db-prog-fill"
-                  style={{ width: `${progress}%` }}
-                />
               </div>
             </div>
-          </div>
 
-          {/* ── Overview ── */}
-          <div style={{ marginBottom: 40 }}>
-            <div className="db-section-header">
-              <p className="db-section-title">Overview</p>
-              <div className="db-section-rule" />
-            </div>
-            <div className="db-overview">
-              <p className="db-overview-text">{data.summary}</p>
-            </div>
-          </div>
+            {/* ── Stats ── */}
+            <div className="db-stats">
+              <div className="db-stat">
+                <p className="db-stat-label">Confidence Score</p>
+                <p className="db-stat-value">
+                  {(data.confidence_score * 100).toFixed(0)}
+                  <span
+                    style={{
+                      fontSize: 18,
+                      fontFamily: "var(--db-mono)",
+                      fontWeight: 400,
+                    }}
+                  >
+                    %
+                  </span>
+                </p>
+                <p className="db-stat-sub">AI-assessed readiness</p>
+              </div>
 
-          {/* ── Roadmap ── */}
-          <div className="db-roadmap">
-            <div className="db-section-header">
-              <p className="db-section-title">Roadmap</p>
-              <div className="db-section-rule" />
-              <span className="db-section-count">
-                {data.monthly_milestones.length} PHASES
-              </span>
-            </div>
-            <div className="db-phases">
-              {data.monthly_milestones.map((phase) => (
-                <PhaseCard key={phase.phase} phase={phase} />
-              ))}
-            </div>
-          </div>
+              <div className="db-stat">
+                <p className="db-stat-label">Recommended Domain</p>
+                <p
+                  className="db-stat-value"
+                  style={{ fontSize: "clamp(16px, 2.2vw, 22px)", marginTop: 6 }}
+                >
+                  {data.recommended_domain}
+                </p>
+                <p className="db-stat-sub">Primary career vector</p>
+              </div>
 
-          {/* ── CTA ── */}
-          <button className="db-cta" onClick={() => navigate("/roadmap")}>
-            <span>View Full Roadmap</span>
-            <span className="db-cta-arrow">→</span>
-          </button>
-        </div>
+              <div className="db-stat">
+                <p className="db-stat-label">Overall Progress</p>
+                <p className="db-stat-value">
+                  {progress}
+                  <span
+                    style={{
+                      fontSize: 18,
+                      fontFamily: "var(--db-mono)",
+                      fontWeight: 400,
+                    }}
+                  >
+                    %
+                  </span>
+                </p>
+                <div className="db-prog-track">
+                  <div
+                    className="db-prog-fill"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* ── Overview ── */}
+            <div style={{ marginBottom: 40 }}>
+              <div className="db-section-header">
+                <p className="db-section-title">Overview</p>
+                <div className="db-section-rule" />
+              </div>
+              <div className="db-overview">
+                <p className="db-overview-text">{data.summary}</p>
+              </div>
+            </div>
+
+            {/* ── Roadmap ── */}
+            <div className="db-roadmap">
+              <div className="db-section-header">
+                <p className="db-section-title">Roadmap</p>
+                <div className="db-section-rule" />
+                <span className="db-section-count">
+                  {data.monthly_milestones.length} PHASES
+                </span>
+              </div>
+              <div className="db-phases">
+                {data.monthly_milestones.map((phase) => (
+                  <PhaseCard key={phase.phase} phase={phase} />
+                ))}
+              </div>
+            </div>
+
+            {/* ── CTA ── */}
+            <button className="db-cta" onClick={() => navigate("/roadmap")}>
+              <span>View Full Roadmap</span>
+              <span className="db-cta-arrow">→</span>
+            </button>
+          </div>
+        ) : (
+          <div className="db-loader">
+            <div className="db-loader-bar">
+              <div className="db-loader-fill" />
+            </div>
+            <span>Configuring your profile node</span>
+          </div>
+        )}
       </div>
     </>
   );
