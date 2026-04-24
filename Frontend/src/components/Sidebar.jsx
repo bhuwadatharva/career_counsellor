@@ -42,7 +42,7 @@ export const Sidebar = ({ onLinkClick }) => {
           Dashboard
         </NavLink>
 
-        <NavLink
+        {/* <NavLink
           to="/performance"
           className={({ isActive }) =>
             `${baseClasses} ${isActive ? activeClass : inactiveClass}`
@@ -51,7 +51,7 @@ export const Sidebar = ({ onLinkClick }) => {
         >
           <MdShowChart size={18} />
           Performance
-        </NavLink>
+        </NavLink>*/}
 
         <NavLink
           to="/roadmap"
@@ -86,7 +86,7 @@ export const Sidebar = ({ onLinkClick }) => {
           Achievements
         </NavLink>
 
-        <NavLink
+        {/* <NavLink
           to="/profile"
           className={({ isActive }) =>
             `${baseClasses} ${isActive ? activeClass : inactiveClass}`
@@ -95,7 +95,7 @@ export const Sidebar = ({ onLinkClick }) => {
         >
           <CgProfile size={18} />
           Profile
-        </NavLink>
+        </NavLink> */}
       </nav>
 
       {/* ✅ Logout Button */}
