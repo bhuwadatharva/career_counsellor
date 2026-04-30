@@ -415,7 +415,7 @@ function CompanyLogos({ companies }) {
         <div
           key={co.name}
           title={co.name}
-          className="inline-flex items-center gap-1.5 px-2 py-[3px] rounded-full border border-[#333] bg-[#111] hover:bg-black hover:border-[#444] hover:shadow-sm transition-all cursor-default group"
+          className="inline-flex items-center gap-1.5 px-2 py-[3px] rounded-full border border-slate-200 bg-white hover:bg-slate-50 hover:border-emerald-200 hover:shadow-sm transition-all cursor-default group"
         >
           <div
             className="w-[14px] h-[14px] rounded-full overflow-hidden flex-shrink-0"
@@ -428,14 +428,14 @@ function CompanyLogos({ companies }) {
               onError={(e) => { e.target.style.display = "none"; }}
             />
           </div>
-          <span className="text-[11px] font-medium text-gray-400 group-hover:text-gray-100 whitespace-nowrap leading-none">
+          <span className="text-[11px] font-medium text-slate-500 group-hover:text-emerald-700 whitespace-nowrap leading-none">
             {co.name}
           </span>
         </div>
       ))}
       {extra > 0 && (
         <div
-          className="inline-flex items-center px-2 py-[3px] rounded-full border border-dashed border-[#444] bg-black text-[11px] font-medium text-gray-400 cursor-default whitespace-nowrap"
+          className="inline-flex items-center px-2 py-[3px] rounded-full border border-dashed border-slate-300 bg-white text-[11px] font-medium text-slate-500 cursor-default whitespace-nowrap"
           title={companies.slice(MAX).map((c) => c.name).join(", ")}
         >
           +{extra} more
@@ -452,7 +452,7 @@ function IconBtn({ title, children, color = "hover:text-[#aaa]" }) {
       href="#"
       title={title}
       onClick={e => e.preventDefault()}
-      className={`inline-flex items-center justify-content-center w-9 h-9 rounded-full bg-[#1a1a1a] border border-[#333] text-gray-400 ${color} hover:border-[#444] transition-all duration-150 mx-auto`}
+      className={`inline-flex items-center justify-content-center w-9 h-9 rounded-full bg-white border border-slate-200 text-slate-400 ${color} hover:border-emerald-300 hover:text-emerald-600 transition-all duration-150 mx-auto shadow-sm`}
     >
       {children}
     </a>
@@ -472,19 +472,19 @@ function TopicRow({ topic }) {
     });
 
   return (
-    <div className="rounded-2xl overflow-hidden border border-[#333] bg-black hover:border-[#444] transition-colors shadow-sm">
+    <div className="rounded-2xl overflow-hidden border border-emerald-100 bg-white hover:border-emerald-200 transition-colors shadow-sm">
       {/* Header */}
       <button
         onClick={() => setOpen(o => !o)}
-        className="w-full flex items-center justify-between px-5 py-4 hover:bg-orange-50 transition-colors text-left"
+        className="w-full flex items-center justify-between px-5 py-4 hover:bg-emerald-50/50 transition-colors text-left"
       >
-        <span className="text-orange-500 font-semibold text-base tracking-tight">
+        <span className="text-emerald-800 font-semibold text-base tracking-tight">
           Day {topic.day} : {topic.title}
         </span>
-        <span className="flex items-center gap-3 text-sm text-gray-400 font-medium">
+        <span className="flex items-center gap-3 text-sm text-slate-500 font-medium">
           {solved.size}/{topic.problems.length}
           <span
-            className="text-base text-gray-400 inline-block transition-transform duration-300"
+            className="text-base text-slate-400 inline-block transition-transform duration-300"
             style={{ transform: open ? "rotate(0deg)" : "rotate(180deg)" }}
           >
             ⌃
@@ -494,10 +494,10 @@ function TopicRow({ topic }) {
 
       {/* Problems Table */}
       {open && (
-        <div className="overflow-x-auto border-t border-gray-100">
+        <div className="overflow-x-auto border-t border-slate-100">
           <table className="w-full text-sm border-collapse">
             <thead>
-              <tr className="bg-[#111] text-gray-400 text-xs uppercase tracking-wider">
+              <tr className="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider">
                 <th className="w-10 px-4 py-2 text-left"></th>
                 <th className="px-4 py-2 text-left min-w-[200px]">Problem</th>
                 <th className="w-16 px-4 py-2 text-center">Article</th>
@@ -512,13 +512,13 @@ function TopicRow({ topic }) {
               {topic.problems.map((p) => (
                 <tr
                   key={p.id}
-                  className={`border-t border-gray-100 hover:bg-[#111] transition-colors ${solved.has(p.id) ? "opacity-40" : ""}`}
+                  className={`border-t border-slate-100 hover:bg-slate-50/50 transition-colors ${solved.has(p.id) ? "opacity-50 bg-slate-50/30" : ""}`}
                 >
                   {/* Checkbox */}
                   <td className="px-4 py-3">
                     <button
                       onClick={() => toggleSolved(p.id)}
-                      className={`w-[22px] h-[22px] rounded-full border-2 flex items-center justify-center transition-all ${solved.has(p.id) ? "bg-orange-500 border-orange-500" : "border-[#444] hover:border-orange-400"}`}
+                      className={`w-[22px] h-[22px] rounded-full border-2 flex items-center justify-center transition-all shadow-sm ${solved.has(p.id) ? "bg-emerald-500 border-emerald-500" : "bg-white border-slate-300 hover:border-emerald-400"}`}
                     >
                       {solved.has(p.id) && (
                         <svg width="10" height="10" viewBox="0 0 16 16" fill="none">
@@ -533,7 +533,7 @@ function TopicRow({ topic }) {
                       href={toLeetCodeUrl(p.title)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-300 hover:text-orange-500 transition-colors leading-relaxed font-medium hover:underline underline-offset-2"
+                      className="text-slate-700 hover:text-emerald-600 transition-colors leading-relaxed font-medium hover:underline underline-offset-2"
                     >
                       {p.title}
                     </a>
@@ -549,7 +549,7 @@ function TopicRow({ topic }) {
                   </td>
                   {/* YouTube */}
                   <td className="px-4 py-3 text-center">
-                    <IconBtn title="YouTube" color="hover:text-[#ff4343]">
+                    <IconBtn title="YouTube">
                       <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
                         <rect x="2" y="5" width="20" height="14" rx="4" stroke="currentColor" strokeWidth="1.8" />
                         <polygon points="10,9 10,15 16,12" fill="currentColor" />
@@ -558,7 +558,7 @@ function TopicRow({ topic }) {
                   </td>
                   {/* Practice */}
                   <td className="px-4 py-3 text-center">
-                    <IconBtn title="Practice" color="hover:text-[#61bd6d]">
+                    <IconBtn title="Practice">
                       <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
                         <path d="M8 9L4 12l4 3M16 9l4 3-4 3M14 6l-4 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
@@ -571,7 +571,7 @@ function TopicRow({ topic }) {
                   {/* Timer */}
                   <td className="px-4 py-3">
                     <div className="flex flex-col gap-1">
-                      <span className="text-gray-400 text-xs">{p.time} Min</span>
+                      <span className="text-slate-500 text-xs font-medium">{p.time} Min</span>
                       <div className="flex gap-1 text-sm">
                         <span title="Start timer" className="cursor-pointer hover:scale-110 transition-transform">⏱</span>
                         <span title="Lock" className="cursor-pointer hover:scale-110 transition-transform">🔒</span>
@@ -613,14 +613,14 @@ const Test = () => {
 
   return (
     <div
-      className="min-h-screen pb-20 bg-black"
-      style={{ color: "#1a1a1a", fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" }}
+      className="min-h-screen pb-20 bg-slate-50 relative bg-square-pattern"
+      style={{ color: "#1e293b", fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" }}
     >
       {/* ── Header ── */}
       <div
-        className="border-b border-[#333] px-6 py-5"
+        className="border-b border-emerald-100 px-6 py-5 relative z-10"
         style={{
-          background: "linear-gradient(135deg,#111 0%,#000 100%)",
+          background: "linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)",
           position: "relative",
           overflow: "hidden",
         }}
@@ -629,38 +629,38 @@ const Test = () => {
         <div
           style={{
             position: "absolute", inset: 0, pointerEvents: "none",
-            backgroundImage: "linear-gradient(rgba(0,0,0,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.03) 1px,transparent 1px)",
+            backgroundImage: "linear-gradient(rgba(16,185,129,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(16,185,129,0.04) 1px,transparent 1px)",
             backgroundSize: "30px 30px",
           }}
         />
         <div className="max-w-5xl mx-auto flex items-center justify-between relative">
           <div className="flex items-center gap-4">
             <div
-              className="w-14 h-14 rounded-2xl flex items-center justify-center font-black text-lg text-white"
-              style={{ background: "linear-gradient(135deg,#ff4f3d,#ff8c42)", boxShadow: "0 4px 20px rgba(255,79,61,0.4)" }}
+              className="w-14 h-14 rounded-2xl flex items-center justify-center font-black text-lg text-white shadow-sm"
+              style={{ background: "linear-gradient(135deg, #10b981, #047857)", boxShadow: "0 4px 20px rgba(16,185,129,0.3)" }}
             >
               DSA
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-gray-100 leading-none tracking-tight">DSA Sheet</h1>
-              <p className="text-xs text-gray-400 mt-1">{totalProblems} problems across {DSA_TOPICS.length} topics</p>
+              <h1 className="text-2xl font-bold text-emerald-900 leading-none tracking-tight">DSA Sheet</h1>
+              <p className="text-xs text-slate-500 mt-1">{totalProblems} problems across {DSA_TOPICS.length} topics</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-2xl">🔥</span>
+            <span className="text-2xl">⚡</span>
             <div className="text-right">
-              <div className="text-lg font-bold text-orange-500">0</div>
-              <div className="text-[10px] text-gray-400 uppercase tracking-wider">Day Streak</div>
+              <div className="text-lg font-bold text-emerald-600">0</div>
+              <div className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Day Streak</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* ── Controls ── */}
-      <div className="max-w-5xl mx-auto px-6 py-5 flex flex-wrap items-center gap-3">
+      <div className="max-w-5xl mx-auto px-6 py-5 flex flex-wrap items-center gap-3 relative z-10">
         {/* Search */}
         <div className="relative flex-1 min-w-[220px]">
-          <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" viewBox="0 0 24 24" fill="none" width="17" height="17">
+          <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" viewBox="0 0 24 24" fill="none" width="17" height="17">
             <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="2" />
             <path d="M21 21l-4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
@@ -669,13 +669,13 @@ const Test = () => {
             placeholder="Search question, company..."
             value={search}
             onChange={e => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm outline-none transition-all"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm outline-none transition-all placeholder:text-slate-400"
             style={{
-              background: "#1a1a1a", border: "1px solid #333",
-              color: "#fff", boxSizing: "border-box",
+              background: "#ffffff", border: "1px solid #e2e8f0",
+              color: "#1e293b", boxSizing: "border-box", boxShadow: "0 1px 2px rgba(0,0,0,0.05)"
             }}
-            onFocus={e => { e.target.style.borderColor = "#f97316"; e.target.style.boxShadow = "0 0 0 3px rgba(249,115,22,0.1)"; }}
-            onBlur={e => { e.target.style.borderColor = "#e5e7eb"; e.target.style.boxShadow = "none"; }}
+            onFocus={e => { e.target.style.borderColor = "#10b981"; e.target.style.boxShadow = "0 0 0 3px rgba(16,185,129,0.1)"; }}
+            onBlur={e => { e.target.style.borderColor = "#e2e8f0"; e.target.style.boxShadow = "0 1px 2px rgba(0,0,0,0.05)"; }}
           />
         </div>
 
@@ -693,7 +693,7 @@ const Test = () => {
               <button
                 key={d}
                 onClick={() => setFilterDiff(d)}
-                className={`px-4 py-2 rounded-lg border text-xs font-semibold transition-all ${isActive ? activeColors[d] : "border-[#333] text-gray-500 hover:text-gray-300 hover:border-[#444] bg-black"}`}
+                className={`px-4 py-2 rounded-lg border text-xs font-semibold transition-all shadow-sm ${isActive ? activeColors[d] : "border-slate-200 text-slate-500 hover:text-slate-700 hover:border-slate-300 bg-white"}`}
               >
                 {d}
               </button>
@@ -702,19 +702,18 @@ const Test = () => {
         </div>
 
         {/* Stats */}
-        <div className="flex gap-4 ml-auto text-xs text-gray-400">
-          <span><span className="text-green-600 font-semibold">Easy</span> · {DSA_TOPICS.flatMap(t => t.problems).filter(p => p.difficulty === "Easy").length}</span>
-          <span><span className="text-orange-500 font-semibold">Med</span> · {DSA_TOPICS.flatMap(t => t.problems).filter(p => p.difficulty === "Medium").length}</span>
-          <span><span className="text-red-500 font-semibold">Hard</span> · {DSA_TOPICS.flatMap(t => t.problems).filter(p => p.difficulty === "Hard").length}</span>
+        <div className="flex gap-4 ml-auto text-xs text-slate-500 font-medium">
+          <span><span className="text-emerald-600 font-bold">Easy</span> · {DSA_TOPICS.flatMap(t => t.problems).filter(p => p.difficulty === "Easy").length}</span>
+          <span><span className="text-amber-500 font-bold">Med</span> · {DSA_TOPICS.flatMap(t => t.problems).filter(p => p.difficulty === "Medium").length}</span>
+          <span><span className="text-rose-500 font-bold">Hard</span> · {DSA_TOPICS.flatMap(t => t.problems).filter(p => p.difficulty === "Hard").length}</span>
         </div>
       </div>
 
-      {/* ── Topics ── */}
-      <div className="max-w-5xl mx-auto px-6 flex flex-col gap-3">
+      <div className="max-w-5xl mx-auto px-6 flex flex-col gap-3 relative z-10">
         {filtered.length === 0 ? (
-          <div className="text-center py-20 text-gray-400">
-            <div className="text-5xl mb-4">🔍</div>
-            <div className="text-lg font-medium text-gray-500">No problems found</div>
+          <div className="text-center py-20 text-slate-400">
+            <div className="text-5xl mb-4 opacity-50">🔍</div>
+            <div className="text-lg font-medium text-slate-500">No problems found</div>
             <div className="text-sm mt-1">Try a different search term or filter</div>
           </div>
         ) : (

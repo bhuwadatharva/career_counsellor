@@ -32,6 +32,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register"; // 🔥 added
 import { useAuth } from "./AuthContext";
 import Task from "./pages/Dashboard/Task.jsx";
+import Jobs from "./pages/Dashboard/Jobs.jsx";
 
 // 🔐 PROTECTED ROUTE
 const ProtectedRoute = ({ children }) => {
@@ -57,9 +58,9 @@ const PublicRoute = ({ children }) => {
 
 const DashboardLayout = () => {
   return (
-    <div className="h-screen flex flex-col bg-[#050505] overflow-hidden relative">
+    <div className="h-screen flex flex-col bg-slate-50 overflow-hidden relative">
       <div className="flex flex-1 overflow-hidden relative ">
-        <div className="w-60 bg-black p-4 shadow-lg h-full hidden md:block">
+        <div className="w-60 bg-white p-4 shadow-lg border-r border-emerald-100 h-full hidden md:block">
           <Sidebar />
         </div>
 
@@ -75,6 +76,7 @@ const DashboardLayout = () => {
             <Route path="/notification" element={<Notification />} />
             <Route path="/achievements" element={<Achievement />} />
             <Route path="/test" element={<Test />} />
+            <Route path="/jobs" element={<Jobs />} />
             <Route path="/task/:phaseId/:projectId" element={<Task />} />
             <Route path="/phase/:phaseId" element={<PhaseDetails />} />
           </Routes>

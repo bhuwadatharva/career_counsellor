@@ -8,20 +8,20 @@ const STYLES = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap');
 
   .db-root {
-    --db-bg: #000000;
-    --db-fg: #ffffff;
-    --db-mid: #888888;
-    --db-border: #333333;
-    --db-accent: #111111;
-    --db-tag-bg: #222222;
-    --db-hover-bg: #1a1a1a;
-    --db-hover-fg: #ffffff;
+    --db-bg: #f8fafc;
+    --db-fg: #047857;
+    --db-mid: #64748b;
+    --db-border: #d1fae5;
+    --db-accent: #ffffff;
+    --db-tag-bg: #ecfdf5;
+    --db-hover-bg: #f0fdf4;
+    --db-hover-fg: #064e3b;
     --db-serif: 'Playfair Display', Georgia, serif;
     --db-mono: 'DM Mono', 'Courier New', monospace;
     --db-sans: 'DM Sans', sans-serif;
     font-family: var(--db-sans);
-    background: var(--db-bg);
-    color: var(--db-fg);
+    background: transparent;
+    color: #1e293b;
     min-height: 100vh;
   }
 
@@ -188,7 +188,7 @@ const STYLES = `
     right: 20px;
     font-family: var(--db-serif);
     font-size: 120px;
-    color: #222222;
+    color: #ecfdf5;
     line-height: 1;
     pointer-events: none;
     user-select: none;
@@ -196,8 +196,8 @@ const STYLES = `
   .db-overview-text {
     font-size: 14px;
     line-height: 1.75;
-    color: #cccccc;
-    font-weight: 300;
+    color: #334155;
+    font-weight: 400;
     position: relative;
     z-index: 1;
   }
@@ -296,11 +296,11 @@ const STYLES = `
   }
   .db-phase-list li {
     font-size: 13px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.6;
     padding: 5px 0;
     border-bottom: 1px solid var(--db-border);
-    color: #dddddd;
+    color: #334155;
   }
   .db-phase-list li:last-child {
     border-bottom: none;
@@ -359,7 +359,7 @@ const STYLES = `
     position: absolute;
     top: 0; left: -100%;
     width: 100%; height: 100%;
-    background: #000;
+    background: #047857;
     transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 0;
   }
@@ -367,7 +367,7 @@ const STYLES = `
     left: 0;
   }
   .db-cta:hover {
-    color: var(--db-fg);
+    color: #ffffff;
   }
   .db-cta span, .db-cta-arrow {
     position: relative;
@@ -511,7 +511,7 @@ export default function Dashboard() {
     return (
       <>
         <style>{STYLES}</style>
-        <div className="db-root">
+        <div className="db-root relative bg-slate-50 bg-square-pattern min-h-screen">
           <div className="db-loader">
             <div className="db-loader-bar">
               <div className="db-loader-fill" />
@@ -526,7 +526,7 @@ export default function Dashboard() {
   return (
     <>
       <style>{STYLES}</style>
-      <div className="db-root">
+      <div className="db-root relative bg-slate-50 bg-square-pattern min-h-screen">
         {showModal && (
           <Profilesetup
             onClose={() => {

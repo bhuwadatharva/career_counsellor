@@ -39,7 +39,7 @@ export default function PhaseDetails() {
 
   if (!data) {
     return (
-      <div className="p-6 h-full flex items-center justify-center font-mono text-sm tracking-widest text-gray-500 uppercase">
+      <div className="p-6 h-full flex items-center justify-center font-mono text-sm tracking-widest text-slate-500 uppercase bg-slate-50 bg-square-pattern">
         Loading Phase Intelligence...
       </div>
     );
@@ -48,24 +48,25 @@ export default function PhaseDetails() {
   const isCompleted = data.phase.status === "completed";
 
   return (
-    <div className="p-10 max-w-5xl mx-auto h-full flex flex-col bg-black">
+    <div className="relative p-10 max-w-5xl mx-auto min-h-full flex flex-col bg-slate-50 bg-square-pattern overflow-hidden">
+      <div className="relative z-10">
       {/* HEADER */}
-      <div className="border-b-2 border-neutral-800 pb-4 mb-8 flex justify-between items-end">
+      <div className="border-b-2 border-emerald-100 pb-4 mb-8 flex justify-between items-end">
         <div>
-          <p className="font-mono text-[10px] tracking-widest text-gray-500 uppercase mb-2">
+          <p className="font-mono text-[10px] tracking-widest text-emerald-600 font-bold uppercase mb-2">
             Phase {String(data.phase.phase_number).padStart(2, "0")}
           </p>
-          <h1 className="text-4xl font-serif font-black tracking-tight text-white">
+          <h1 className="text-4xl font-serif font-black tracking-tight text-emerald-900">
             {data.phase.title}
           </h1>
         </div>
-        <span className="font-mono text-[10px] tracking-widest text-gray-500 uppercase border border-[#444] px-3 py-1 rounded">
+        <span className="font-mono text-[10px] font-bold tracking-widest text-emerald-800 uppercase border border-emerald-200 bg-emerald-50 px-3 py-1 rounded">
           {data.phase.status}
         </span>
       </div>
 
       {/* 🎥 VIDEOS */}
-      <h2 className="text-sm font-mono tracking-widest uppercase text-gray-500 mb-4">
+      <h2 className="text-sm font-mono font-bold tracking-widest uppercase text-slate-500 mb-4">
         📺 01 / Learn
       </h2>
 
@@ -76,21 +77,21 @@ export default function PhaseDetails() {
           return (
             <div
               key={i}
-              className="border border-[#333] p-4 rounded hover:border-neutral-800 transition-colors duration-300"
+              className="border border-emerald-100 bg-white p-4 rounded-xl shadow-sm hover:border-emerald-300 hover:shadow-md hover:-translate-y-1 transition-all duration-300"
             >
               <img
                 src={`https://img.youtube.com/vi/${videoId}/0.jpg`}
                 alt="thumbnail"
-                className="w-full rounded mb-3 grayscale hover:grayscale-0 transition-all duration-300"
+                className="w-full rounded-lg mb-3 object-cover shadow-sm transition-all duration-300"
               />
-              <h3 className="font-semibold text-lg font-serif">
+              <h3 className="font-semibold text-lg font-serif text-slate-800">
                 {video.title}
               </h3>
               <a
                 href={video.url}
                 target="_blank"
                 rel="noreferrer"
-                className="text-white font-mono text-xs uppercase tracking-widest mt-2 inline-block border-b border-neutral-800 pb-1 hover:text-gray-400 hover:border-gray-600 transition"
+                className="text-emerald-600 font-mono text-xs uppercase tracking-widest mt-2 font-bold inline-block border-b border-emerald-200 pb-1 hover:text-emerald-800 hover:border-emerald-400 transition"
               >
                 Watch Video ↗
               </a>
@@ -100,28 +101,28 @@ export default function PhaseDetails() {
       </div>
 
       {/* 💻 TASKS */}
-      <h2 className="text-sm font-mono tracking-widest uppercase text-gray-500 mb-4 mt-6">
+      <h2 className="text-sm font-mono font-bold tracking-widest uppercase text-slate-500 mb-4 mt-6">
         💻 02 / Tasks
       </h2>
-      <div className="mb-10 p-6 border border-neutral-800 bg-[#111] flex flex-col gap-4">
-        <p className="font-serif text-lg mb-4 text-white border-b border-[#444] pb-4">
+      <div className="mb-10 p-6 border border-emerald-100 rounded-xl shadow-sm bg-white flex flex-col gap-4">
+        <p className="font-serif text-lg mb-4 text-slate-700 border-b border-slate-100 pb-4">
           Apply your knowledge by completing the assigned tasks for this phase.
         </p>
         {data.projects.map((project) => (
           <div
             key={project.id}
-            className="flex flex-col md:flex-row items-start md:items-center justify-between border border-[#444] p-4 bg-black hover:border-neutral-800 transition-all"
+            className="flex flex-col md:flex-row items-start md:items-center justify-between border border-slate-200 p-4 rounded-lg bg-slate-50 hover:border-emerald-200 hover:shadow-sm transition-all"
           >
             <div>
-              <h3 className="font-semibold text-lg font-serif">
+              <h3 className="font-semibold text-lg font-serif text-emerald-900">
                 {project.title}
               </h3>
-              <p className="font-mono text-[10px] tracking-widest uppercase text-gray-500 mt-1">
+              <p className="font-mono text-[10px] tracking-widest uppercase text-slate-500 mt-1 flex items-center gap-2">
                 Status:{" "}
                 <span
-                  className={
-                    project.status === "approved" ? "text-white font-bold" : ""
-                  }
+                  className={`font-bold px-2 py-0.5 rounded ${
+                    project.status === "approved" ? "bg-emerald-100 text-emerald-700" : "bg-slate-200 text-slate-600"
+                  }`}
                 >
                   {project.status === "approved" ? "Completed" : "Pending"}
                 </span>
@@ -129,7 +130,7 @@ export default function PhaseDetails() {
             </div>
             <button
               onClick={() => navigate(`/task/${phaseId}/${project.id}`)}
-              className="mt-4 md:mt-0 bg-black text-white px-6 py-2 font-mono text-xs tracking-widest uppercase hover:bg-gray-800 transition-colors"
+              className="mt-4 md:mt-0 bg-emerald-600 text-white rounded-lg px-6 py-2 font-mono font-bold text-xs tracking-widest uppercase hover:bg-emerald-700 hover:shadow-md transition-all"
             >
               {project.status === "approved" ? "Review Task" : "Submit Task"} →
             </button>
@@ -138,10 +139,10 @@ export default function PhaseDetails() {
       </div>
 
       {/* ✅ SKILLS */}
-      <h2 className="text-sm font-mono tracking-widest uppercase text-gray-500 mb-4 mt-2">
+      <h2 className="text-sm font-mono font-bold tracking-widest uppercase text-slate-500 mb-4 mt-2">
         ✅ 03 / Skills & Validation
       </h2>
-      <p className="text-gray-400 mb-4 text-sm font-sans">
+      <p className="text-slate-600 mb-4 text-sm font-sans">
         After completing your task, validate your acquired skills below to
         complete this phase.
       </p>
@@ -150,11 +151,11 @@ export default function PhaseDetails() {
         {data.skills.map((skill) => (
           <label
             key={skill.id}
-            className="flex items-center gap-4 p-3 border border-[#333] cursor-pointer hover:border-neutral-800 transition-colors rounded"
+            className="flex items-center gap-4 p-3 bg-white border border-emerald-100 cursor-pointer hover:border-emerald-300 transition-colors rounded-lg shadow-sm"
           >
             <input
               type="checkbox"
-              className="w-5 h-5 accent-black cursor-pointer"
+              className="w-5 h-5 accent-emerald-600 cursor-pointer rounded"
               checked={skill.status === "completed"}
               onChange={() => completeSkill(skill.id)}
               disabled={skill.status === "completed"}
@@ -162,8 +163,8 @@ export default function PhaseDetails() {
             <span
               className={`font-medium ${
                 skill.status === "completed"
-                  ? "line-through text-gray-400"
-                  : "text-white"
+                  ? "line-through text-slate-400"
+                  : "text-slate-700"
               }`}
             >
               {skill.name}
@@ -174,21 +175,22 @@ export default function PhaseDetails() {
 
       {/* 🎉 COMPLETION MESSAGE */}
       {isCompleted && (
-        <div className="mt-8 p-6 bg-black text-white text-center border border-neutral-800">
-          <h2 className="text-2xl font-serif font-bold mb-2">
-            Phase Operations Completed
+        <div className="mt-8 p-6 bg-white text-emerald-900 text-center border border-emerald-200 rounded-xl shadow-sm">
+          <h2 className="text-2xl font-serif font-bold mb-2 flex items-center justify-center gap-2">
+            <span className="text-emerald-500">✓</span> Phase Operations Completed
           </h2>
-          <p className="font-mono text-xs tracking-widest text-gray-400 mb-6 uppercase">
+          <p className="font-mono text-xs tracking-widest font-bold text-emerald-600 mb-6 uppercase">
             Badge Acquired Successfully
           </p>
           <button
             onClick={() => navigate("/roadmap")}
-            className="bg-black text-white px-6 py-2 rounded-none font-mono text-xs uppercase tracking-widest hover:bg-gray-200 transition"
+            className="bg-emerald-600 text-white px-6 py-2 rounded-lg font-mono font-bold text-xs uppercase tracking-widest hover:bg-emerald-700 hover:shadow-md transition-all"
           >
             Return to Roadmap
           </button>
         </div>
       )}
+      </div>
     </div>
   );
 }

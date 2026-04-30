@@ -8,20 +8,20 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <nav className="bg-black shadow-md sticky top-0 z-50">
+    <nav className="bg-white shadow-sm border-b border-emerald-100 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="text-xl font-bold text-white">CareerPath</div>
+          <div className="text-xl font-bold text-emerald-900">CareerPath</div>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex gap-6 items-center text-gray-300 font-medium">
+          <ul className="hidden md:flex gap-6 items-center text-slate-600 font-medium">
             <NavLink
               to="/"
               className={({ isActive }) =>
                 isActive
-                  ? "text-white border-b-2 border-neutral-800 pb-1"
-                  : "hover:text-white transition"
+                  ? "text-emerald-700 border-b-2 border-emerald-500 pb-1"
+                  : "hover:text-emerald-600 transition"
               }
             >
               Home
@@ -30,8 +30,8 @@ const Navbar = () => {
               to="/main"
               className={({ isActive }) =>
                 isActive
-                  ? "text-white border-b-2 border-neutral-800 pb-1"
-                  : "hover:text-white transition"
+                  ? "text-emerald-700 border-b-2 border-emerald-500 pb-1"
+                  : "hover:text-emerald-600 transition"
               }
             >
               Tools
@@ -40,8 +40,8 @@ const Navbar = () => {
               to="/about"
               className={({ isActive }) =>
                 isActive
-                  ? "text-white border-b-2 border-neutral-800 pb-1"
-                  : "hover:text-white transition"
+                  ? "text-emerald-700 border-b-2 border-emerald-500 pb-1"
+                  : "hover:text-emerald-600 transition"
               }
             >
               About
@@ -50,8 +50,8 @@ const Navbar = () => {
               to="/pricing"
               className={({ isActive }) =>
                 isActive
-                  ? "text-white border-b-2 border-neutral-800 pb-1"
-                  : "hover:text-white transition"
+                  ? "text-emerald-700 border-b-2 border-emerald-500 pb-1"
+                  : "hover:text-emerald-600 transition"
               }
             >
               Pricing
@@ -60,8 +60,8 @@ const Navbar = () => {
               to="/contact"
               className={({ isActive }) =>
                 isActive
-                  ? "text-white border-b-2 border-neutral-800 pb-1"
-                  : "hover:text-white transition"
+                  ? "text-emerald-700 border-b-2 border-emerald-500 pb-1"
+                  : "hover:text-emerald-600 transition"
               }
             >
               Contact
@@ -72,7 +72,7 @@ const Navbar = () => {
           <div className="hidden md:block">
             <NavLink
               to="/login"
-              className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition"
+              className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition"
             >
               Login
             </NavLink>
@@ -82,7 +82,7 @@ const Navbar = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={toggleMenu}
-              className="text-gray-300 focus:outline-none"
+              className="text-slate-600 focus:outline-none"
             >
               {isOpen ? <FiX size={28} /> : <FiMenu size={28} />}
             </button>
@@ -92,15 +92,15 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-black shadow-md">
-          <ul className="flex flex-col gap-4 p-4 text-gray-300 font-medium">
+        <div className="md:hidden bg-white shadow-md border-t border-emerald-100">
+          <ul className="flex flex-col gap-4 p-4 text-slate-600 font-medium">
             <NavLink
               to="/"
               onClick={toggleMenu}
               className={({ isActive }) =>
                 isActive
-                  ? "text-white border-b-2 border-neutral-800 pb-1"
-                  : "hover:text-white transition"
+                  ? "text-emerald-700 border-b-2 border-emerald-500 pb-1"
+                  : "hover:text-emerald-600 transition"
               }
             >
               Home
@@ -110,8 +110,8 @@ const Navbar = () => {
               onClick={toggleMenu}
               className={({ isActive }) =>
                 isActive
-                  ? "text-white border-b-2 border-neutral-800 pb-1"
-                  : "hover:text-white transition"
+                  ? "text-emerald-700 border-b-2 border-emerald-500 pb-1"
+                  : "hover:text-emerald-600 transition"
               }
             >
               Tools
@@ -121,8 +121,8 @@ const Navbar = () => {
               onClick={toggleMenu}
               className={({ isActive }) =>
                 isActive
-                  ? "text-white border-b-2 border-neutral-800 pb-1"
-                  : "hover:text-white transition"
+                  ? "text-emerald-700 border-b-2 border-emerald-500 pb-1"
+                  : "hover:text-emerald-600 transition"
               }
             >
               About
@@ -132,8 +132,8 @@ const Navbar = () => {
               onClick={toggleMenu}
               className={({ isActive }) =>
                 isActive
-                  ? "text-white border-b-2 border-neutral-800 pb-1"
-                  : "hover:text-white transition"
+                  ? "text-emerald-700 border-b-2 border-emerald-500 pb-1"
+                  : "hover:text-emerald-600 transition"
               }
             >
               Pricing
@@ -143,15 +143,15 @@ const Navbar = () => {
               onClick={toggleMenu}
               className={({ isActive }) =>
                 isActive
-                  ? "text-white border-b-2 border-neutral-800 pb-1"
-                  : "hover:text-white transition"
+                  ? "text-emerald-700 border-b-2 border-emerald-500 pb-1"
+                  : "hover:text-emerald-600 transition"
               }
             >
               Contact
             </NavLink>
             <NavLink
               to="/login"
-              className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition text-center"
+              className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition text-center"
             >
               Login
             </NavLink>

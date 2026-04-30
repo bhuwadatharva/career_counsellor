@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../AuthContext";
 
-/* ─── Scoped styles matching Dashboard editorial theme ─── */
 const STYLES = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap');
 
   .ps-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(10,10,10,0.85);
+    background: rgba(248,250,252,0.85); 
     backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
@@ -24,19 +23,19 @@ const STYLES = `
   }
 
   .ps-card {
-    background: #000000;
+    background: #ffffff;
     width: 100%;
     max-width: 620px;
-    border-radius: 4px;
-    border: 1px solid #333333;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 32px 80px rgba(0,0,0,0.8);
+    box-shadow: 0 32px 80px rgba(0,0,0,0.05);
   }
 
   /* ── Header bar ── */
   .ps-header {
-    border-bottom: 1px solid #333333;
+    border-bottom: 1px solid #e2e8f0;
     padding: 22px 32px 18px;
     display: flex;
     align-items: flex-start;
@@ -47,7 +46,7 @@ const STYLES = `
     font-size: 9px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #888;
+    color: #64748b;
     margin-bottom: 4px;
   }
   .ps-header-title {
@@ -55,29 +54,29 @@ const STYLES = `
     font-size: 20px;
     font-weight: 900;
     letter-spacing: -0.02em;
-    color: #ffffff;
+    color: #064e3b;
   }
   .ps-step-counter {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
     letter-spacing: 0.12em;
-    color: #888;
+    color: #64748b;
     padding-top: 4px;
   }
   .ps-step-counter strong {
-    color: #ffffff;
-    font-weight: 500;
+    color: #064e3b;
+    font-weight: 700;
   }
 
   /* ── Progress track ── */
   .ps-progress-track {
-    height: 2px;
-    background: #333333;
+    height: 3px;
+    background: #e2e8f0;
     width: 100%;
   }
   .ps-progress-fill {
-    height: 2px;
-    background: #ffffff;
+    height: 3px;
+    background: #10b981;
     transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
@@ -93,24 +92,25 @@ const STYLES = `
     font-size: 9px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #aaa;
+    color: #94a3b8;
     margin-bottom: 10px;
+    font-weight: bold;
   }
   .ps-q-text {
     font-family: 'Playfair Display', serif;
     font-size: clamp(17px, 2.5vw, 22px);
     font-weight: 700;
     line-height: 1.35;
-    color: #ffffff;
+    color: #064e3b;
     letter-spacing: -0.01em;
     margin-bottom: 6px;
   }
   .ps-q-sub {
     font-family: 'DM Sans', sans-serif;
     font-size: 12px;
-    color: #999;
+    color: #64748b;
     margin-bottom: 26px;
-    font-weight: 300;
+    font-weight: 500;
     letter-spacing: 0.02em;
   }
   .ps-multi-hint {
@@ -121,13 +121,14 @@ const STYLES = `
     font-size: 9px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #aaa;
+    color: #64748b;
     margin-bottom: 14px;
-    border: 1px solid #333333;
-    background: #111111;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
     padding: 4px 10px;
-    border-radius: 2px;
+    border-radius: 4px;
     width: fit-content;
+    font-weight: bold;
   }
 
   /* ── Options ── */
@@ -142,9 +143,9 @@ const STYLES = `
     align-items: center;
     gap: 14px;
     padding: 13px 16px;
-    border: 1px solid #333333;
-    border-radius: 3px;
-    background: #111111;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #ffffff;
     cursor: pointer;
     text-align: left;
     transition: all 0.15s ease;
@@ -156,83 +157,89 @@ const STYLES = `
     content: '';
     position: absolute;
     inset: 0;
-    background: #ffffff;
+    background: #ecfdf5;
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.2s cubic-bezier(0.4,0,0.2,1);
     z-index: 0;
+  }
+  .ps-option:hover {
+    border-color: #a7f3d0;
   }
   .ps-option:hover::before {
     transform: scaleX(1);
   }
   .ps-option:hover .ps-opt-id,
   .ps-option:hover .ps-opt-text {
-    color: #000000;
+    color: #064e3b;
   }
   .ps-option:hover .ps-opt-check {
-    border-color: #000000;
+    border-color: #10b981;
   }
   .ps-option.selected {
-    border-color: #ffffff;
-    background: #ffffff;
+    border-color: #10b981;
+    background: #ecfdf5;
   }
   .ps-option.selected .ps-opt-id,
   .ps-option.selected .ps-opt-text {
-    color: #000000;
+    color: #064e3b;
+    font-weight: 600;
   }
   .ps-option.selected .ps-opt-check {
-    border-color: #000000;
-    background: #000000;
+    border-color: #10b981;
+    background: #10b981;
   }
   .ps-option.selected .ps-opt-check::after {
     opacity: 1;
   }
   .ps-opt-check {
-    width: 16px;
-    height: 16px;
-    border: 1.5px solid #666;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #cbd5e1;
     border-radius: 50%;
     flex-shrink: 0;
     position: relative;
     z-index: 1;
     transition: all 0.15s ease;
+    background: #ffffff;
   }
   .ps-opt-check.square {
-    border-radius: 2px;
+    border-radius: 4px;
   }
   .ps-opt-check::after {
     content: '';
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 6px; height: 6px;
+    width: 8px; height: 8px;
     background: #ffffff;
     border-radius: 50%;
     opacity: 0;
     transition: opacity 0.15s ease;
   }
   .ps-opt-check.square::after {
-    width: 7px; height: 5px;
+    width: 8px; height: 6px;
     background: transparent;
-    border-bottom: 1.5px solid #ffffff;
-    border-right: 1.5px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    border-right: 2px solid #ffffff;
     transform: translate(-50%, -62%) rotate(45deg);
     border-radius: 0;
   }
   .ps-opt-id {
     font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: #888;
+    font-size: 11px;
+    color: #94a3b8;
     min-width: 16px;
     position: relative;
     z-index: 1;
     transition: color 0.15s ease;
+    font-weight: bold;
   }
   .ps-opt-text {
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    color: #dddddd;
+    font-size: 14px;
+    font-weight: 500;
+    color: #334155;
     line-height: 1.4;
     position: relative;
     z-index: 1;
@@ -242,11 +249,12 @@ const STYLES = `
   /* ── Footer nav ── */
   .ps-footer {
     padding: 18px 32px 24px;
-    border-top: 1px solid #333;
+    border-top: 1px solid #e2e8f0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
+    background: #f8fafc;
   }
   .ps-btn-back {
     display: flex;
@@ -256,21 +264,26 @@ const STYLES = `
     font-size: 10px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #888;
-    background: none;
-    border: 1px solid #333;
+    color: #64748b;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
     padding: 10px 18px;
-    border-radius: 3px;
+    border-radius: 6px;
     cursor: pointer;
     transition: all 0.15s ease;
+    font-weight: bold;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   }
   .ps-btn-back:hover {
-    border-color: #555;
-    color: #cecece;
+    border-color: #cbd5e1;
+    color: #334155;
+    background: #f1f5f9;
   }
   .ps-btn-back:disabled {
-    opacity: 0.3;
+    opacity: 0.4;
     cursor: not-allowed;
+    background: transparent;
+    box-shadow: none;
   }
   .ps-btn-next {
     display: flex;
@@ -280,11 +293,11 @@ const STYLES = `
     font-size: 10px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #000;
-    background: #ffffff;
-    border: 1.5px solid #ffffff;
+    color: #ffffff;
+    background: #10b981;
+    border: 1.5px solid #10b981;
     padding: 11px 24px;
-    border-radius: 3px;
+    border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s ease;
     position: relative;
@@ -293,12 +306,14 @@ const STYLES = `
     justify-content: center;
     max-width: 240px;
     margin-left: auto;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(16,185,129,0.2);
   }
   .ps-btn-next::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: #cccccc;
+    background: #059669;
     transform: scaleX(0);
     transform-origin: right;
     transition: transform 0.2s ease;
@@ -307,38 +322,43 @@ const STYLES = `
   .ps-btn-next:hover::before {
     transform: scaleX(1);
   }
+  .ps-btn-next:hover {
+    box-shadow: 0 4px 16px rgba(16,185,129,0.3);
+  }
   .ps-btn-next span, .ps-btn-next svg {
     position: relative;
     z-index: 1;
   }
   .ps-btn-next:disabled {
-    opacity: 0.35;
+    opacity: 0.4;
     cursor: not-allowed;
+    box-shadow: none;
   }
   .ps-btn-next.submit {
-    background: #ffffff;
+    background: #059669;
+    border-color: #059669;
   }
 
   /* ── Dot indicators ── */
   .ps-dots {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
   }
   .ps-dot {
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: #333;
-    transition: all 0.2s ease;
+    background: #cbd5e1;
+    transition: all 0.3s ease;
   }
   .ps-dot.active {
-    background: #ffffff;
-    width: 18px;
-    border-radius: 3px;
+    background: #10b981;
+    width: 20px;
+    border-radius: 4px;
   }
   .ps-dot.done {
-    background: #666;
+    background: #a7f3d0;
   }
 
   /* ── Slide animation ── */
@@ -365,26 +385,28 @@ const STYLES = `
     font-size: 22px;
     font-weight: 700;
     letter-spacing: -0.01em;
-    color: #ffffff;
+    color: #064e3b;
   }
   .ps-gen-sub {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #aaa;
+    color: #64748b;
     margin-top: -10px;
+    font-weight: bold;
   }
   .ps-gen-bar {
     width: 160px;
-    height: 1px;
-    background: #333;
+    height: 2px;
+    background: #e2e8f0;
     overflow: hidden;
     margin-top: 8px;
+    border-radius: 2px;
   }
   .ps-gen-fill {
-    height: 1px;
-    background: #ffffff;
+    height: 2px;
+    background: #10b981;
     animation: ps-gen-anim 1.6s ease-in-out infinite;
   }
   @keyframes ps-gen-anim {
@@ -395,6 +417,9 @@ const STYLES = `
 
   @media (max-width: 480px) {
     .ps-header, .ps-stage, .ps-footer { padding-left: 20px; padding-right: 20px; }
+    .ps-dots { display: none; }
+  }
+\`;left: 20px; padding-right: 20px; }
     .ps-dots { display: none; }
   }
 `;

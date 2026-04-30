@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { MdOutlineDashboard, MdOutlineQuiz, MdShowChart } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogOut, FiBriefcase } from "react-icons/fi";
 import { IoGitBranchOutline, IoTrophyOutline } from "react-icons/io5";
 import { useAuth } from "../AuthContext";
 
@@ -11,9 +11,9 @@ export const Sidebar = ({ onLinkClick }) => {
 
   const baseClasses =
     "px-4 py-3 flex items-center gap-3 text-[15px] rounded border border-transparent font-medium transition-all duration-300";
-  const activeClass = "bg-black text-white shadow font-semibold";
+  const activeClass = "bg-emerald-50 text-emerald-800 shadow-sm border-emerald-200 font-semibold";
   const inactiveClass =
-    "text-gray-400 hover:bg-[#1a1a1a] hover:text-white hover:border-[#444]";
+    "text-slate-500 hover:bg-slate-50 hover:text-emerald-700 hover:border-emerald-100";
 
   const handleClick = () => onLinkClick && onLinkClick();
 
@@ -76,6 +76,17 @@ export const Sidebar = ({ onLinkClick }) => {
         </NavLink>
 
         <NavLink
+          to="/jobs"
+          className={({ isActive }) =>
+            `${baseClasses} ${isActive ? activeClass : inactiveClass}`
+          }
+          onClick={handleClick}
+        >
+          <FiBriefcase size={18} />
+          Jobs
+        </NavLink>
+
+        <NavLink
           to="/achievements"
           className={({ isActive }) =>
             `${baseClasses} ${isActive ? activeClass : inactiveClass}`
@@ -102,7 +113,7 @@ export const Sidebar = ({ onLinkClick }) => {
       <div className="px-2 mt-4">
         <button
           onClick={logout}
-          className="w-full flex items-center gap-2 px-4 py-3 text-[15px] font-medium text-white border border-neutral-800 rounded hover:bg-black hover:text-white transition-all duration-300"
+          className="w-full flex items-center gap-2 px-4 py-3 text-[15px] font-medium text-emerald-700 border border-emerald-200 rounded hover:bg-emerald-50 hover:text-emerald-800 transition-all duration-300"
         >
           <FiLogOut size={18} />
           Logout

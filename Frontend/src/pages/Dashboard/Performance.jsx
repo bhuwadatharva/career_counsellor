@@ -47,42 +47,42 @@ export default function Performance() {
   return (
     <div className="p-6 flex flex-col gap-6 w-full overflow-y-auto">
       {/* Subject-wise Performance */}
-      <div className="bg-black p-5 rounded-xl shadow">
-        <h2 className="text-lg font-semibold mb-3 text-[#2563EB]">
+      <div className="bg-white border border-emerald-100 p-5 rounded-xl shadow-sm">
+        <h2 className="text-lg font-semibold mb-3 text-emerald-800">
           Subject-wise Performance
         </h2>
         <ResponsiveContainer width="100%" height={260}>
           <BarChart data={subjectScores}>
-            <XAxis dataKey="subject" />
-            <Tooltip />
-            <Bar dataKey="score" fill="#2563EB" radius={[8, 8, 0, 0]} />
+            <XAxis dataKey="subject" tick={{ fill: '#64748b' }} />
+            <Tooltip contentStyle={{ backgroundColor: '#fff', borderColor: '#d1fae5', borderRadius: '8px' }} />
+            <Bar dataKey="score" fill="#10b981" radius={[8, 8, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
-        <p className="text-sm text-gray-400 mt-3">
+        <p className="text-sm text-slate-500 mt-3">
           You are **strong** in <b>Data Analysis & Python</b>. You may need
           improvement in <b>Machine Learning</b>.
         </p>
       </div>
 
       {/* Predicted Growth */}
-      <div className="bg-black p-5 rounded-xl shadow">
-        <h2 className="text-lg font-semibold mb-3 text-[#2563EB]">
+      <div className="bg-white border border-emerald-100 p-5 rounded-xl shadow-sm">
+        <h2 className="text-lg font-semibold mb-3 text-emerald-800">
           Predicted Growth (Next 5 Months)
         </h2>
         <ResponsiveContainer width="100%" height={260}>
           <LineChart data={predictedGrowth}>
-            <XAxis dataKey="month" />
-            <Tooltip />
+            <XAxis dataKey="month" tick={{ fill: '#64748b' }} />
+            <Tooltip contentStyle={{ backgroundColor: '#fff', borderColor: '#d1fae5', borderRadius: '8px' }} />
             <Line
               type="monotone"
               dataKey="score"
-              stroke="#4F46E5"
+              stroke="#047857"
               strokeWidth={3}
-              dot
+              dot={{ fill: '#10b981', r: 4 }}
             />
           </LineChart>
         </ResponsiveContainer>
-        <p className="text-sm text-gray-400 mt-3">
+        <p className="text-sm text-slate-500 mt-3">
           Your learning curve shows **steady improvement**. If you maintain
           consistency, you are projected to reach a strong professional skill
           level soon.
@@ -90,43 +90,43 @@ export default function Performance() {
       </div>
 
       {/* Skill Radar Chart */}
-      <div className="bg-black p-5 rounded-xl shadow">
-        <h2 className="text-lg font-semibold mb-3 text-[#2563EB]">
+      <div className="bg-white border border-emerald-100 p-5 rounded-xl shadow-sm">
+        <h2 className="text-lg font-semibold mb-3 text-emerald-800">
           Strength / Weakness Breakdown
         </h2>
         <ResponsiveContainer width="100%" height={260}>
           <RadarChart data={skillRadar}>
-            <PolarGrid />
-            <PolarAngleAxis dataKey="skill" />
+            <PolarGrid stroke="#e2e8f0" />
+            <PolarAngleAxis dataKey="skill" tick={{ fill: '#64748b', fontSize: 12 }} />
             <Radar
               dataKey="level"
-              stroke="#2563EB"
-              fill="#2563EB"
+              stroke="#10b981"
+              fill="#10b981"
               fillOpacity={0.4}
             />
           </RadarChart>
         </ResponsiveContainer>
-        <p className="text-sm text-gray-400 mt-3">
+        <p className="text-sm text-slate-500 mt-3">
           Strength Area: <b>Problem Solving & Adaptability</b>
           Needs Practice: <b>Creativity & Communication</b>
         </p>
       </div>
 
       {/* Competitions & Achievements */}
-      <div className="bg-black p-5 rounded-xl shadow">
-        <h2 className="text-lg font-semibold mb-4 text-[#2563EB]">
+      <div className="bg-white border border-emerald-100 p-5 rounded-xl shadow-sm">
+        <h2 className="text-lg font-semibold mb-4 text-emerald-800">
           Past Competition Performance
         </h2>
-        <ul className="space-y-2 text-gray-300 text-sm">
+        <ul className="space-y-2 text-slate-600 text-sm">
           {competitions.map((comp, i) => (
-            <li key={i} className="flex justify-between border-b pb-2">
+            <li key={i} className="flex justify-between border-b border-emerald-50 pb-2">
               <span>{comp.name}</span>
-              <span className="font-medium text-[#2563EB]">{comp.result}</span>
+              <span className="font-medium text-emerald-600">{comp.result}</span>
             </li>
           ))}
         </ul>
 
-        <p className="text-sm text-gray-400 mt-3">
+        <p className="text-sm text-slate-500 mt-3">
           You have shown **consistent performance** in competitive settings,
           proving readiness for real-world challenges.
         </p>

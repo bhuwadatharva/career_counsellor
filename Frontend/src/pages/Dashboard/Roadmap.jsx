@@ -26,17 +26,17 @@ export default function Roadmap() {
   }, [user]);
 
   return (
-    <div className="p-10 max-w-7xl mx-auto h-full bg-[#0a0a0a]">
-      <div className="border-b-2 border-neutral-800 pb-4 mb-8">
-        <h1 className="text-4xl font-serif font-black tracking-tight text-white">
+    <div className="relative p-10 max-w-7xl mx-auto min-h-full bg-slate-50 overflow-hidden bg-square-pattern">
+      <div className="relative z-10 border-b-2 border-emerald-100 pb-4 mb-8">
+        <h1 className="text-4xl font-serif font-black tracking-tight text-emerald-900">
           Career Roadmap Strategy
         </h1>
-        <p className="font-mono text-xs tracking-widest text-gray-500 uppercase mt-2">
+        <p className="font-mono text-xs tracking-widest text-emerald-700/70 uppercase mt-2">
           Your path to operational excellence
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {phases.map((phase) => (
           <div
             key={phase.id}
@@ -45,40 +45,40 @@ export default function Roadmap() {
                 navigate(`/phase/${phase.id}`);
               }
             }}
-            className={`p-6 border transition-all duration-300 relative overflow-hidden group ${
+            className={`p-6 border transition-all duration-300 relative overflow-hidden group rounded-xl shadow-sm ${
               phase.status === "locked"
-                ? "bg-[#1a1a1a] border-[#444] cursor-not-allowed opacity-70"
-                : "bg-black border-neutral-800 cursor-pointer hover:-translate-y-1 hover:shadow-[4px_4px_0_rgba(255,255,255,0.15)]"
+                ? "bg-slate-100 border-slate-200 cursor-not-allowed opacity-70"
+                : "bg-white border-emerald-100 cursor-pointer hover:-translate-y-1 hover:shadow-xl hover:border-emerald-300"
             }`}
           >
             {/* Status indicator line element */}
             <div
-              className={`absolute top-0 left-0 w-1 h-full ${
+              className={`absolute top-0 left-0 w-1.5 h-full transition-all duration-300 ${
                 phase.status === "completed"
-                  ? "bg-black"
+                  ? "bg-emerald-600"
                   : phase.status === "active"
-                    ? "bg-gray-400"
+                    ? "bg-emerald-400"
                     : "bg-transparent"
               }`}
             />
 
-            <span className="font-mono text-[10px] tracking-widest uppercase border border-[#444] px-2 py-1 bg-black text-white mb-4 inline-block">
+            <span className="font-mono text-[10px] font-bold tracking-widest uppercase border border-emerald-200 px-2 py-1 bg-emerald-50 text-emerald-800 rounded mb-4 inline-block">
               Phase {String(phase.phase_number).padStart(2, "0")}
             </span>
 
-            <h3 className="text-xl font-serif font-bold text-white group-hover:underline underline-offset-4 decoration-2">
+            <h3 className="text-xl font-serif font-bold text-slate-800 group-hover:text-emerald-900 transition-colors">
               {phase.title}
             </h3>
 
-            <p className="mt-4 font-mono text-[11px] uppercase tracking-widest flex justify-between items-center text-gray-500">
+            <p className="mt-4 font-mono text-[11px] uppercase tracking-widest flex justify-between items-center text-slate-500">
               <span>Status</span>
               <span
                 className={`font-semibold border-b ${
                   phase.status === "completed"
-                    ? "text-white border-neutral-800"
+                    ? "text-emerald-700 border-emerald-200"
                     : phase.status === "active"
-                      ? "text-white border-dashed border-neutral-800"
-                      : "text-gray-400 border-[#444]"
+                      ? "text-emerald-600 border-dashed border-emerald-300"
+                      : "text-slate-400 border-slate-300"
                 }`}
               >
                 {phase.status}
