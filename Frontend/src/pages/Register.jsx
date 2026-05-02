@@ -21,14 +21,11 @@ const Register = () => {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(
-        "https://career-counsellor-ha78.onrender.com/auth/register",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
-        },
-      );
+      const res = await fetch("http://127.0.0.1:8000/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
 
       const data = await res.json();
 
@@ -44,7 +41,10 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 px-6 bg-square-pattern" style={{ fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" }}>
+    <div
+      className="min-h-screen flex items-center justify-center bg-slate-50 px-6 bg-square-pattern"
+      style={{ fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" }}
+    >
       <div className="w-full max-w-md relative">
         {/* Decorative corner accents */}
         <div className="absolute -top-4 -left-4 w-8 h-8 border-t-2 border-l-2 border-emerald-300 pointer-events-none rounded-tl-xl" />

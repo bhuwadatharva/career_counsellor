@@ -436,9 +436,7 @@ export default function Profilesetup({ onClose }) {
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      const res = await fetch(
-        "https://career-counsellor-22cy.onrender.com/questions",
-      );
+      const res = await fetch("http://127.0.0.1:8001/questions");
       const data = await res.json();
       setQuestions(data.questions || []);
     };
@@ -482,7 +480,7 @@ export default function Profilesetup({ onClose }) {
         answers,
       };
       const res = await fetch(
-        `https://career-counsellor-ha78.onrender.com/career/generate/${user.user_id}`,
+        `http://127.0.0.1:8000/career/generate/${user.user_id}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

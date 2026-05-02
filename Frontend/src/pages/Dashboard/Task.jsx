@@ -14,7 +14,7 @@ export default function Task() {
     const fetchPhaseDetails = async () => {
       try {
         const res = await fetch(
-          `https://career-counsellor-ha78.onrender.com/phases/details/${phaseId}`,
+          `http://127.0.0.1:8000/phases/details/${phaseId}`,
         );
         const result = await res.json();
 
@@ -41,17 +41,14 @@ export default function Task() {
 
     try {
       await fetch(
-        `https://career-counsellor-ha78.onrender.com/projects/submit/${project.id}?link=${encodeURIComponent(submissionUrl)}`,
+        `http://127.0.0.1:8000/projects/submit/${project.id}?link=${encodeURIComponent(submissionUrl)}`,
         { method: "PUT" },
       );
 
       // Auto approve for MVP
-      await fetch(
-        `https://career-counsellor-ha78.onrender.com/projects/approve/${project.id}`,
-        {
-          method: "PUT",
-        },
-      );
+      await fetch(`http://127.0.0.1:8000/projects/approve/${project.id}`, {
+        method: "PUT",
+      });
 
       setShowPopup(true);
 

@@ -24,7 +24,7 @@ const Login = () => {
       setError(null);
 
       const res = await fetch(
-        `https://career-counsellor-ha78.onrender.com/auth/login?email=${form.email}&password=${form.password}`,
+        `http://127.0.0.1:8000/auth/login?email=${form.email}&password=${form.password}`,
         { method: "POST" },
       );
 
@@ -44,7 +44,10 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 px-6 bg-square-pattern" style={{ fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" }}>
+    <div
+      className="min-h-screen flex items-center justify-center bg-slate-50 px-6 bg-square-pattern"
+      style={{ fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" }}
+    >
       <div className="w-full max-w-md relative">
         {/* Decorative corner accents */}
         <div className="absolute -top-4 -left-4 w-8 h-8 border-t-2 border-l-2 border-emerald-300 pointer-events-none rounded-tl-xl" />

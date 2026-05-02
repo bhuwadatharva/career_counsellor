@@ -1,7 +1,7 @@
 import requests
 from app.schemas.ai_schema import AIResponseSchema
 
-BASE_URL = "https://career-counsellor-22cy.onrender.com"
+BASE_URL = "http://127.0.0.1:8001"
 
 
 # 🧾 GET QUESTIONS (optional - for frontend)

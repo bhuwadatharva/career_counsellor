@@ -9,9 +9,7 @@ export default function Achievement() {
   useEffect(() => {
     const fetchBadges = async () => {
       try {
-        const res = await fetch(
-          `https://career-counsellor-ha78.onrender.com/badges/${user.user_id}`,
-        );
+        const res = await fetch(`http://127.0.0.1:8000/badges/${user.user_id}`);
         const data = await res.json();
         setBadges(data);
       } catch (err) {
@@ -66,7 +64,10 @@ export default function Achievement() {
                       src={badgeIconUrl}
                       alt="Badge Icon"
                       className="w-8 h-8 opacity-80 filter drop-shadow-sm brightness-0 invert"
-                      style={{ filter: 'brightness(0) saturate(100%) invert(35%) sepia(50%) saturate(700%) hue-rotate(120deg) brightness(90%) contrast(90%)' }}
+                      style={{
+                        filter:
+                          "brightness(0) saturate(100%) invert(35%) sepia(50%) saturate(700%) hue-rotate(120deg) brightness(90%) contrast(90%)",
+                      }}
                     />
                   </div>
                   <h3 className="font-serif font-bold text-lg mb-1 leading-tight text-slate-800 group-hover:text-emerald-900">
