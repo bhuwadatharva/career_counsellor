@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { RiTeamLine } from "react-icons/ri";
 import { LuUserPlus } from "react-icons/lu";
 import { FaUser, FaChartBar, FaCreditCard, FaLock } from "react-icons/fa";
+import { useAuth } from "../../../AuthContext";
 
 import PersonalDetails from "./PersonalDetails";
 import AnalyticsSection from "./AnalyticsSection";
@@ -9,15 +10,37 @@ import PaymentSection from "./PaymentSection";
 import PrivacySection from "./PrivacySection";
 
 export default function Profile() {
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState("Personal Details");
   const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
 
-  // Dummy profile data
-  const formData = {
-    student_name: "Jane Smith",
-    courses_in_progress: 5,
-    courses_completed: 12,
-  };
+  const [profileData, setProfileData] = useState({
+    name: "Loading...",
+    email: "...",
+  });
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (!user?.user_id) return;
+      try {
+        const res = await fetch(
+          `http://127.0.0.1:8000/auth/profile/${user.user_id}`,
+        );
+        if (res.ok) {
+          const data = await res.json();
+          setProfileData((prev) => ({
+            ...prev,
+            name: data.name || "Unknown",
+            email: data.email || "No email",
+          }));
+        }
+      } catch (err) {
+        console.error("Failed to fetch profile", err);
+      }
+    };
+
+    fetchProfile();
+  }, [user]);
 
   const tabs = [
     { id: "Personal Details", label: "Personal Details", icon: <FaUser /> },
@@ -36,24 +59,11 @@ export default function Profile() {
               className="w-24 h-24 rounded-full object-cover mb-4 border-2 border-emerald-200"
             />
             <h2 className="text-xl font-semibold text-emerald-900 text-center">
-              {formData.student_name}
+              {profileData.name}
             </h2>
+            <p className="text-sm text-slate-500 mt-1">{profileData.email}</p>
 
             {/* Course Stats */}
-            <div className="flex gap-6 mt-6 mb-6">
-              <div className="text-center">
-                <div className="text-lg font-bold text-emerald-700">
-                  {formData.courses_in_progress}
-                </div>
-                <div className="text-sm text-slate-500">In Progress</div>
-              </div>
-              <div className="text-center">
-                <div className="text-lg font-bold text-emerald-700">
-                  {formData.courses_completed}
-                </div>
-                <div className="text-sm text-slate-500">Completed</div>
-              </div>
-            </div>
 
             {/* Achievements */}
 
@@ -87,9 +97,7 @@ export default function Profile() {
             </div>
 
             {/* Tab Content */}
-            {activeTab === "Personal Details" && (
-              <PersonalDetails student={formData} />
-            )}
+            {activeTab === "Personal Details" && <PersonalDetails />}
           </div>
         </div>
       </div>
@@ -107,8 +115,9 @@ export default function Profile() {
               />
               <div>
                 <h2 className="text-lg font-semibold text-emerald-900">
-                  {formData.student_name}
+                  {profileData.name}
                 </h2>
+                <p className="text-xs text-slate-500">{profileData.email}</p>
               </div>
             </div>
             <button
@@ -118,32 +127,11 @@ export default function Profile() {
               {isMobileDropdownOpen ? "▲" : "▼"}
             </button>
           </div>
-
-          {isMobileDropdownOpen && (
-            <div className="mt-4 space-y-4 border-t border-emerald-100 pt-4">
-              <div className="flex justify-center gap-8">
-                <div className="text-center">
-                  <div className="text-lg font-bold text-emerald-700">
-                    {formData.courses_in_progress}
-                  </div>
-                  <div className="text-sm text-slate-500">In Progress</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-emerald-700">
-                    {formData.courses_completed}
-                  </div>
-                  <div className="text-sm text-slate-500">Completed</div>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
 
         {/* Main Tab Content */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          {activeTab === "Personal Details" && (
-            <PersonalDetails student={formData} />
-          )}
+          {activeTab === "Personal Details" && <PersonalDetails />}
         </div>
 
         {/* Mobile Bottom Navigation */}
