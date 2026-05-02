@@ -13,11 +13,13 @@ export default function Jobs() {
       try {
         setLoading(true);
         const res = await fetch(
-          `http://127.0.0.1:8000/jobs/match/${user.user_id}`
+          `https://career-counsellor-ha78.onrender.com/jobs/match/${user.user_id}`,
         );
         if (!res.ok) {
           if (res.status === 404) {
-            throw new Error("No matching jobs found. Complete more skills to unlock matches.");
+            throw new Error(
+              "No matching jobs found. Complete more skills to unlock matches.",
+            );
           }
           throw new Error("Failed to fetch jobs");
         }
@@ -39,9 +41,28 @@ export default function Jobs() {
       <div className="absolute inset-0 z-0 opacity-[0.04] pointer-events-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="squares" width="60" height="60" patternUnits="userSpaceOnUse">
-              <rect width="60" height="60" fill="none" stroke="#047857" strokeWidth="1" />
-              <rect width="30" height="30" fill="none" stroke="#047857" strokeWidth="0.5" x="15" y="15" />
+            <pattern
+              id="squares"
+              width="60"
+              height="60"
+              patternUnits="userSpaceOnUse"
+            >
+              <rect
+                width="60"
+                height="60"
+                fill="none"
+                stroke="#047857"
+                strokeWidth="1"
+              />
+              <rect
+                width="30"
+                height="30"
+                fill="none"
+                stroke="#047857"
+                strokeWidth="0.5"
+                x="15"
+                y="15"
+              />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#squares)" />
@@ -67,7 +88,9 @@ export default function Jobs() {
 
         {error && (
           <div className="bg-red-50 border border-red-200 p-6 rounded-lg shadow-sm">
-            <p className="text-red-700 font-mono text-sm uppercase tracking-widest">{error}</p>
+            <p className="text-red-700 font-mono text-sm uppercase tracking-widest">
+              {error}
+            </p>
           </div>
         )}
 
@@ -111,7 +134,10 @@ export default function Jobs() {
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {job.job_skills.slice(0, 4).map((skill, i) => (
-                          <span key={i} className="text-[10px] font-mono border border-slate-200 px-2 py-1 bg-slate-50 text-slate-600 rounded-md">
+                          <span
+                            key={i}
+                            className="text-[10px] font-mono border border-slate-200 px-2 py-1 bg-slate-50 text-slate-600 rounded-md"
+                          >
                             {skill}
                           </span>
                         ))}
