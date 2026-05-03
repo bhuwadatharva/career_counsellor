@@ -67,7 +67,7 @@ const Register = () => {
               </label>
               <input
                 name="name"
-                placeholder="e.g. Atharva Bhuwad"
+                placeholder="e.g. Jane Doe"
                 className="block w-full py-4 px-4 text-sm text-white bg-[#0a0a0a] border border-neutral-800 rounded-sm focus:outline-none focus:border-white transition-colors"
                 onChange={handleChange}
               />
