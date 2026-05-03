@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { RiTeamLine } from "react-icons/ri";
 import { LuUserPlus } from "react-icons/lu";
 import { FaUser, FaChartBar, FaCreditCard, FaLock } from "react-icons/fa";
+import { useAuth } from "../../../AuthContext";
 
 import PersonalDetails from "./PersonalDetails";
 import AnalyticsSection from "./AnalyticsSection";
@@ -9,15 +10,24 @@ import PaymentSection from "./PaymentSection";
 import PrivacySection from "./PrivacySection";
 
 export default function Profile() {
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState("Personal Details");
   const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
+  const [profileName, setProfileName] = useState("Loading...");
+
+  useEffect(() => {
+    if (user?.user_id) {
+      fetch(`https://career-counsellor-ha78.onrender.com/auth/profile/${user.user_id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setProfileName(data.name || "Unknown");
+        })
+        .catch((err) => console.error("Error fetching profile:", err));
+    }
+  }, [user]);
 
   // Dummy profile data
-  const formData = {
-    student_name: "Jane Smith",
-    courses_in_progress: 5,
-    courses_completed: 12,
-  };
+
 
   const tabs = [
     { id: "Personal Details", label: "Personal Details", icon: <FaUser /> },
@@ -36,24 +46,11 @@ export default function Profile() {
               className="w-24 h-24 rounded-full object-cover mb-4 border-2 border-[#333]"
             />
             <h2 className="text-xl font-semibold text-white text-center">
-              {formData.student_name}
+              {profileName}
             </h2>
 
             {/* Course Stats */}
-            <div className="flex gap-6 mt-6 mb-6">
-              <div className="text-center">
-                <div className="text-lg font-bold text-white">
-                  {formData.courses_in_progress}
-                </div>
-                <div className="text-sm text-gray-300">In Progress</div>
-              </div>
-              <div className="text-center">
-                <div className="text-lg font-bold text-white">
-                  {formData.courses_completed}
-                </div>
-                <div className="text-sm text-gray-300">Completed</div>
-              </div>
-            </div>
+
 
             {/* Achievements */}
 
@@ -75,11 +72,10 @@ export default function Profile() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`py-2 px-4 text-sm font-medium focus:outline-none whitespace-nowrap ${
-                    activeTab === tab.id
-                      ? "border-b-2 border-neutral-800 text-white"
-                      : "text-gray-400"
-                  }`}
+                  className={`py-2 px-4 text-sm font-medium focus:outline-none whitespace-nowrap ${activeTab === tab.id
+                    ? "border-b-2 border-neutral-800 text-white"
+                    : "text-gray-400"
+                    }`}
                 >
                   {tab.label}
                 </button>
@@ -88,7 +84,7 @@ export default function Profile() {
 
             {/* Tab Content */}
             {activeTab === "Personal Details" && (
-              <PersonalDetails student={formData} />
+              <PersonalDetails />
             )}
           </div>
         </div>
@@ -107,7 +103,7 @@ export default function Profile() {
               />
               <div>
                 <h2 className="text-lg font-semibold text-white">
-                  {formData.student_name}
+                  {profileName}
                 </h2>
               </div>
             </div>
@@ -123,30 +119,13 @@ export default function Profile() {
             </button>
           </div>
 
-          {isMobileDropdownOpen && (
-            <div className="mt-4 space-y-4 border-t border-[#333] pt-4">
-              <div className="flex justify-center gap-8">
-                <div className="text-center">
-                  <div className="text-lg font-bold text-white">
-                    {formData.courses_in_progress}
-                  </div>
-                  <div className="text-sm text-gray-300">In Progress</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-white">
-                    {formData.courses_completed}
-                  </div>
-                  <div className="text-sm text-gray-300">Completed</div>
-                </div>
-              </div>
-            </div>
-          )}
+
         </div>
 
         {/* Main Tab Content */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {activeTab === "Personal Details" && (
-            <PersonalDetails student={formData} />
+            <PersonalDetails />
           )}
         </div>
 
@@ -157,11 +136,10 @@ export default function Profile() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex flex-col items-center gap-1 px-3 py-2 ${
-                  activeTab === tab.id
-                    ? "text-white font-semibold"
-                    : "text-gray-500"
-                }`}
+                className={`flex flex-col items-center gap-1 px-3 py-2 ${activeTab === tab.id
+                  ? "text-white font-semibold"
+                  : "text-gray-500"
+                  }`}
               >
                 <span className="text-lg">{tab.icon}</span>
                 <span className="text-xs">{tab.label.split(" ")[0]}</span>
