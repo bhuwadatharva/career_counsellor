@@ -13,7 +13,7 @@ export default function Jobs() {
       try {
         setLoading(true);
         const res = await fetch(
-          `http://127.0.0.1:8000/jobs/match/${user.user_id}`,
+          `https://career-counsellor-ha78.onrender.com/jobs/match/${user.user_id}`,
         );
         if (!res.ok) {
           if (res.status === 404) {

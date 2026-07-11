@@ -24,7 +24,7 @@ export default function Profile() {
       if (!user?.user_id) return;
       try {
         const res = await fetch(
-          `http://127.0.0.1:8000/auth/profile/${user.user_id}`,
+          `https://career-counsellor-ha78.onrender.com/auth/profile/${user.user_id}`,
         );
         if (res.ok) {
           const data = await res.json();

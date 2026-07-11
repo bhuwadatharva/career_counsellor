@@ -24,7 +24,7 @@ const Login = () => {
       setError(null);
 
       const res = await fetch(
-        `http://127.0.0.1:8000/auth/login?email=${form.email}&password=${form.password}`,
+        `https://career-counsellor-ha78.onrender.com/auth/login?email=${form.email}&password=${form.password}`,
         { method: "POST" },
       );
 

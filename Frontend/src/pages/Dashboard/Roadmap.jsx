@@ -12,7 +12,9 @@ export default function Roadmap() {
   useEffect(() => {
     const fetchPhases = async () => {
       try {
-        const res = await fetch(`http://127.0.0.1:8000/phases/${user.user_id}`);
+        const res = await fetch(
+          `https://career-counsellor-ha78.onrender.com/phases/${user.user_id}`,
+        );
         const data = await res.json();
         setPhases(data);
       } catch (err) {

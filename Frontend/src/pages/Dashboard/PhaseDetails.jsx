@@ -9,7 +9,9 @@ export default function PhaseDetails() {
 
   // 🔥 FETCH PHASE DATA
   const fetchDetails = async () => {
-    const res = await fetch(`http://127.0.0.1:8000/phases/details/${phaseId}`);
+    const res = await fetch(
+      `https://career-counsellor-ha78.onrender.com/phases/details/${phaseId}`,
+    );
     const result = await res.json();
     setData(result);
   };
@@ -26,9 +28,12 @@ export default function PhaseDetails() {
 
   // ✅ COMPLETE SKILL
   const completeSkill = async (skillId) => {
-    await fetch(`http://127.0.0.1:8000/skills/complete/${skillId}`, {
-      method: "PUT",
-    });
+    await fetch(
+      `https://career-counsellor-ha78.onrender.com/skills/complete/${skillId}`,
+      {
+        method: "PUT",
+      },
+    );
     fetchDetails(); // 🔄 refresh UI
   };
 

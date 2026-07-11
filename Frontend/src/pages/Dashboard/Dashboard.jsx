@@ -473,7 +473,7 @@ export default function Dashboard() {
     const checkFirstTime = async () => {
       try {
         const res = await fetch(
-          `http://127.0.0.1:8000/auth/is-first-time/${user.user_id}`,
+          `https://career-counsellor-ha78.onrender.com/auth/is-first-time/${user.user_id}`,
         );
         const d = await res.json();
         console.log(d);
@@ -492,11 +492,11 @@ export default function Dashboard() {
   const fetchDashboard = async () => {
     try {
       const res = await fetch(
-        `http://127.0.0.1:8000/auth/dashboard/${user.user_id}`,
+        `https://career-counsellor-ha78.onrender.com/auth/dashboard/${user.user_id}`,
       );
       const dashboard = await res.json();
       const res2 = await fetch(
-        `http://127.0.0.1:8000/progress/${user.user_id}`,
+        `https://career-counsellor-ha78.onrender.com/progress/${user.user_id}`,
       );
       const prog = await res2.json();
       setUsers(dashboard?.user);

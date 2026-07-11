@@ -9,7 +9,9 @@ export default function Achievement() {
   useEffect(() => {
     const fetchBadges = async () => {
       try {
-        const res = await fetch(`http://127.0.0.1:8000/badges/${user.user_id}`);
+        const res = await fetch(
+          `https://career-counsellor-ha78.onrender.com/badges/${user.user_id}`,
+        );
         const data = await res.json();
         setBadges(data);
       } catch (err) {

@@ -18,7 +18,9 @@ export default function PersonalDetails() {
       }
       try {
         setLoading(true);
-        const res = await fetch(`http://127.0.0.1:8000/auth/profile/${user.user_id}`);
+        const res = await fetch(
+          `https://career-counsellor-ha78.onrender.com/auth/profile/${user.user_id}`,
+        );
         if (!res.ok) {
           throw new Error("Failed to fetch profile");
         }
@@ -38,19 +40,29 @@ export default function PersonalDetails() {
   }, [user]);
 
   if (loading) {
-    return <div className="text-sm font-medium text-slate-500 animate-pulse">Loading personal details...</div>;
+    return (
+      <div className="text-sm font-medium text-slate-500 animate-pulse">
+        Loading personal details...
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="text-sm font-medium text-red-500">Error: {error}</div>;
+    return (
+      <div className="text-sm font-medium text-red-500">Error: {error}</div>
+    );
   }
 
   return (
     <div>
-      <h3 className="text-lg font-bold mb-4 text-emerald-900">Personal Details</h3>
+      <h3 className="text-lg font-bold mb-4 text-emerald-900">
+        Personal Details
+      </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm mb-1 font-semibold text-slate-600">Name</label>
+          <label className="block text-sm mb-1 font-semibold text-slate-600">
+            Name
+          </label>
           <input
             type="text"
             value={formData.name}
@@ -60,7 +72,9 @@ export default function PersonalDetails() {
         </div>
 
         <div>
-          <label className="block text-sm mb-1 font-semibold text-slate-600">Email</label>
+          <label className="block text-sm mb-1 font-semibold text-slate-600">
+            Email
+          </label>
           <input
             type="email"
             value={formData.email}
