@@ -154,7 +154,7 @@ def regenerate_career_path(db: Session, user_id: int, ai_json: dict):
 
         if existing:
             db.delete(existing)
-            db.flush()
+            db.commit()
 
         # create new
         return create_career_path(db, user_id, ai_json)

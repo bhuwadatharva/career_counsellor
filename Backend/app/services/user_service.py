@@ -5,20 +5,22 @@ from app.models.career import CareerPath
 from typing import Optional
 
 import hashlib
-from passlib.context import CryptContext
-
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+import bcrypt
 
 
-def hash_password(password: str):
-    # 🔥 first hash with sha256 (fixed length)
-    hashed = hashlib.sha256(password.encode()).hexdigest()
-    return pwd_context.hash(hashed)
+def hash_password(password: str) -> str:
+    # Hash with sha256 (64 hex characters < 72 bytes limit) then bcrypt
+    sha_hash = hashlib.sha256(password.encode()).hexdigest().encode("utf-8")
+    salt = bcrypt.gensalt()
+    return bcrypt.hashpw(sha_hash, salt).decode("utf-8")
 
 
-def verify_password(plain_password: str, hashed_password: str):
-    hashed = hashlib.sha256(plain_password.encode()).hexdigest()
-    return pwd_context.verify(hashed, hashed_password)
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    try:
+        sha_hash = hashlib.sha256(plain_password.encode()).hexdigest().encode("utf-8")
+        return bcrypt.checkpw(sha_hash, hashed_password.encode("utf-8"))
+    except Exception:
+        return False
 
 
 # 👤 ---------------- USER CREATION ---------------- #
